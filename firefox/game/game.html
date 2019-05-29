@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css"/>
+	</head>
+	<body>
+		<audio id="buttonsound">
+			<source src="audio/click.ogg" type="audio/ogg">
+		</audio>
+		<audio id="buysound">
+			<source src="audio/buy.ogg" type="audio/ogg">
+		</audio>
+		<table id="loadingScreen">
+			<tr>
+				<td>
+					<h2>Loading</h2>
+					<h1></h1>
+				</td>
+			</tr>
+		</table>
+		<table id="maingame" class="hideScreen">
+			<tr>
+				<td id="mute" class="off"></td>
+				<td colspan="5">
+					Budget: $<span id="userScore">---.--</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="counter" name="bike">-</td>
+				<td class="progressBar" name="bike">Bike Rental</td>
+				<td><button class="runButton" name="bike">Work</button></td>
+				<td><button class="upgradeButton" name="bike">Buy</button></td>
+				<td><button class="hire" name="bike">Hire CEO</button></td>
+				<td><button class="showInformation" name="bike">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="taxi">-</td>
+				<td class="progressBar" name="taxi">Taxi</td>
+				<td><button class="runButton" name="taxi">Work</button></td>
+				<td><button class="upgradeButton" name="taxi">Buy</button></td>
+				<td><button class="hire" name="taxi">Hire CEO</button></td>
+				<td><button class="showInformation" name="taxi">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="bus">-</td>
+				<td class="progressBar" name="bus">Bus</td>
+				<td><button class="runButton" name="bus">Work</button></td>
+				<td><button class="upgradeButton" name="bus">Buy</button></td>
+				<td><button class="hire" name="bus">Hire CEO</button></td>
+				<td><button class="showInformation" name="bus">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="tram">-</td>
+				<td class="progressBar" name="tram">Tram</td>
+				<td><button class="runButton" name="tram">Work</button></td>
+				<td><button class="upgradeButton" name="tram">Buy</button></td>
+				<td><button class="hire" name="tram">Hire CEO</button></td>
+				<td><button class="showInformation" name="tram">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="ferry">-</td>
+				<td class="progressBar" name="ferry">Ferry</td>
+				<td><button class="runButton" name="ferry">Work</button></td>
+				<td><button class="upgradeButton" name="ferry">Buy</button></td>
+				<td><button class="hire" name="ferry">Hire CEO</button></td>
+				<td><button class="showInformation" name="ferry">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="subway">-</td>
+				<td class="progressBar" name="subway">Subway</td>
+				<td><button class="runButton" name="subway">Work</button></td>
+				<td><button class="upgradeButton" name="subway">Buy</button></td>
+				<td><button class="hire" name="subway">Hire CEO</button></td>
+				<td><button class="showInformation" name="subway">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="train">-</td>
+				<td class="progressBar" name="train">Train</td>
+				<td><button class="runButton" name="train">Work</button></td>
+				<td><button class="upgradeButton" name="train">Buy</button></td>
+				<td><button class="hire" name="train">Hire CEO</button></td>
+				<td><button class="showInformation" name="train">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="planerent">-</td>
+				<td class="progressBar" name="planerent">Plane Rentals</td>
+				<td><button class="runButton" name="planerent">Work</button></td>
+				<td><button class="upgradeButton" name="planerent">Buy</button></td>
+				<td><button class="hire" name="planerent">Hire CEO</button></td>
+				<td><button class="showInformation" name="planerent">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="smplane">-</td>
+				<td class="progressBar" name="smplane">Private Aircraft</td>
+				<td><button class="runButton" name="smplane">Work</button></td>
+				<td><button class="upgradeButton" name="smplane">Buy</button></td>
+				<td><button class="hire" name="smplane">Hire CEO</button></td>
+				<td><button class="showInformation" name="smplane">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="mdplane">-</td>
+				<td class="progressBar" name="mdplane">Business Aircraft</td>
+				<td><button class="runButton" name="mdplane">Work</button></td>
+				<td><button class="upgradeButton" name="mdplane">Buy</button></td>
+				<td><button class="hire" name="mdplane">Hire CEO</button></td>
+				<td><button class="showInformation" name="mdplane">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="lgplane">-</td>
+				<td class="progressBar" name="lgplane">Commercial Airliner</td>
+				<td><button class="runButton" name="lgplane">Work</button></td>
+				<td><button class="upgradeButton" name="lgplane">Buy</button></td>
+				<td><button class="hire" name="lgplane">Hire CEO</button></td>
+				<td><button class="showInformation" name="lgplane">?</button></td>
+			</tr>
+			<tr>
+				<td class="counter" name="lgship">-</td>
+				<td class="progressBar" name="lgship">Cruiseliner</td>
+				<td><button class="runButton" name="lgship">Work</button></td>
+				<td><button class="upgradeButton" name="lgship">Buy</button></td>
+				<td><button class="hire" name="lgship">Hire CEO</button></td>
+				<td><button class="showInformation" name="lgship">?</button></td>
+			</tr>
+		</table>
+		<table id="information" class="hideScreen">
+			<tr>
+				<td>
+					<h2 name="info">------</h2><br>
+					<b>Vehicles owned: </b><span name="info">-</span><br>
+					<b>Profit per trip: </b>$<span name="info">-.--</span><br>
+					<b>Length of trip: </b><span name="info">---.--</span><br>
+					<b>Cost to purchase: </b>$<span name="info">-.--</span><br>
+					<b>CEO salary: </b>$<span name="info">-.--</span><br>
+					<b>Active CEO: </b><span name="info">--</span><br><br>
+					<button class="closeInformation" name="close">Close</button>
+				</td>
+			</tr>
+		</table>
+		<table id="summary" class="hideScreen">
+			<tr>
+				<td>
+					You made
+					<h2 id="summaryAmount">$-----.--</h2>
+					since you last played!<br><br>
+					<button class="closeSummary" name="close">Close</button>
+				</td>
+			</tr>
+		</table>
+		<script src="script.js"></script>
+	</body>
+</html>
