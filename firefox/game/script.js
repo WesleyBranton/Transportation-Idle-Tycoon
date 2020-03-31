@@ -191,9 +191,11 @@ function toggleMute() {
     }
 }
 
-// Automatically save data
-window.onmouseout = function() {
-    browser.storage.local.set({
+/**
+ * Save game stats to browser storage
+ */
+function save() {
+	browser.storage.local.set({
         gamedata: {
             bike_units: data.bike.units,
             taxi_units: data.taxi.units,
@@ -235,8 +237,8 @@ window.onmouseout = function() {
             lastplayed: Date.now(),
             mute: setting.mute
         }
-    })
-};
+    });
+}
 
 /**
  * Handle button clicks
@@ -274,7 +276,9 @@ function handleButtons(el) {
             playSound('button');
             toggleSummary(false);
             break;
-    }
+	}
+	
+	save();
 }
 
 /**
@@ -401,12 +405,14 @@ function cycle(type) {
 	currentTime += vehicle.time;
 	vehicle.lastrun = currentTime;
 
-    button.disabled = true;
-	progressBar.className = 'progressBar done';
+	button.disabled = true;
+	startAnimation(progressBar);
     
     browser.alarms.create(vehicle.ident, {
         when: currentTime
-    });
+	});
+	
+	save();
 }
 
 /**
@@ -414,16 +420,15 @@ function cycle(type) {
  * @param {Object} alarmInfo 
  */
 function cycleEnd(alarmInfo) {
-    const vehicle = data[alarmInfo.name];
-    const progressBar = document.getElementsByName(vehicle.ident)[1];
+	const vehicle = data[alarmInfo.name];
 	const button = document.getElementsByName(vehicle.ident)[2];
 	
 	vehicle.running = false;
+	vehicle.lastrun = 0;
     data.score += (vehicle.dollar * vehicle.units);
 	updateScore();
 	
-    button.disabled = false;
-	progressBar.className = 'progressBar';
+	button.disabled = false;
 	
     if (vehicle.hasCEO) {
 		button.disabled = true;
@@ -431,7 +436,9 @@ function cycleEnd(alarmInfo) {
         setTimeout(() => {
             cycle(vehicle.ident)
         }, 100);
-    }
+	}
+	
+	save();
 }
 
 /**
@@ -566,36 +573,45 @@ function loadGame(saved) {
 	];
 
     // Calculate income while away
-    const dateNow = Date.now();
-    const dateDiff = dateNow - dateLeft;
+    const dateDiff = Date.now() - dateLeft;
 	const scoreBefore = data.score;
 	
     for (let i = 0; i < vehicle.length; i++) {
+
+		let dateNow = Date.now();
+		// Add money earned by automatic processes while away (if there's a CEO)
         if (vehicle[i].hasCEO) {
-			// Add money earned by automatic processes while away (if there's a CEO)
-            data.score += Math.round(dateDiff / (vehicle[i].time + 100)) * vehicle[i].dollar * vehicle[i].units;
-        } else {
-            if (vehicle[i].lastrun && vehicle[i].lastrun != 0) {
-				// Handle if the vehicle has been run at all
-                if ((dateNow - vehicle[i].lastrun) >= vehicle[i].time) {
-					// Add completed time if a vehicle run was completed while game was closed
-                    data.score += vehicle[i].dollar;
-				} else if (((dateNow - vehicle[i].lastrun) < vehicle[i].time) && ((dateNow - vehicle[i].lastrun) > -vehicle[i].time)) {
-					// Resume the work cycle if the vehicle cycle is still in progress
-					const progressBar = document.getElementsByName(vehicle[i].ident)[1];
-					const button = document.getElementsByName(vehicle[i].ident)[2];
-					
-					vehicle[i].running = true;
-					
-                    button.disabled = true;
-					progressBar.className = 'progressBar done';
-					
-                    browser.alarms.create(vehicle[i].ident, {
-                        when: vehicle[i].lastrun
-                    });
-                }
-            }
-        }
+			if ((dateNow - vehicle[i].lastrun) >= vehicle[i].time) {
+				data.score += Math.floor(dateDiff / vehicle[i].time) * vehicle[i].dollar * vehicle[i].units;
+				const completed = dateDiff % vehicle[i].time;
+				const nextTime = dateNow + vehicle[i].time - completed
+				vehicle[i].lastrun = nextTime;
+			}
+		}
+
+		if (vehicle[i].lastrun && vehicle[i].lastrun != 0) {
+			// Handle if the vehicle has been run at all
+			
+
+			if ((dateNow - vehicle[i].lastrun) >= vehicle[i].time) {
+				// Add completed time if a vehicle run was completed while game was closed
+				data.score += vehicle[i].dollar;
+			} else if (((dateNow - vehicle[i].lastrun) < vehicle[i].time) && ((dateNow - vehicle[i].lastrun) > -vehicle[i].time)) {
+				// Resume the work cycle if the vehicle cycle is still in progress
+				const progressBar = document.getElementsByName(vehicle[i].ident)[1];
+				const button = document.getElementsByName(vehicle[i].ident)[2];
+				
+				vehicle[i].running = true;
+				
+				button.disabled = true;
+				const animationDelay = (vehicle[i].lastrun - dateNow - vehicle[i].time) / 1000;
+				startDelayedAnimation(progressBar, animationDelay);
+				
+				browser.alarms.create(vehicle[i].ident, {
+					when: vehicle[i].lastrun
+				});
+			}
+		}
 	}
 	
 	// Calculate difference in score
@@ -604,10 +620,6 @@ function loadGame(saved) {
     // Setup unit counters and start work
     for (let i = 0; i < vehicle.length; i++) {
 		document.getElementsByName(vehicle[i].ident)[0].textContent = vehicle[i].units;
-		
-        if (vehicle[i].hasCEO) {
-            cycle(vehicle[i].ident);
-        }
     }
 
     // Setup current prices
@@ -710,4 +722,27 @@ function statusCheck() {
             document.getElementsByName(vehicle[i].ident)[2].disabled = true;
         }
     }
+}
+
+/**
+ * Start progress bar animation from the start
+ * @param {HTMLElement} bar 
+ */
+function startAnimation(bar) {
+	bar.classList.remove('play');
+	bar.removeAttribute('style');
+	void bar.offsetWidth;
+	bar.classList.add('play');
+}
+
+/**
+ * Start progress bar animation with a delay
+ * @param {HTMLElement} bar
+ * @param {number} delay
+ */
+function startDelayedAnimation(bar, delay) {
+	bar.classList.remove('play');
+	bar.setAttribute('style', 'animation-delay: ' + delay + 's;');
+	void bar.offsetWidth;
+	bar.classList.add('play');
 }

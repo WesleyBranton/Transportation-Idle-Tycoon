@@ -136,60 +136,71 @@ button:disabled {
   background-color: #F2F2F2;
   background-position: left center;
   background-repeat: no-repeat;
-  background-size: 0% 100%;
-  transition: none !important;
+  background-size: 0 100%;
 }
 
-.progressBar.done {
-  background-size: 100% 100%;
-
+.play {
+  animation-name: bar-animation;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-fill-mode: none;
 }
 
 /* Progress bar animations */
-.progressBar.done[name="bike"] {
-  transition: linear 0.5s all !important;
+@keyframes bar-animation {
+  from {
+    background-size: 0 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
 }
 
-.progressBar.done[name="taxi"] {
-  transition: linear 3s all !important;
+.progressBar[name="bike"] {
+  animation-duration: .5s !important;
 }
 
-.progressBar.done[name="bus"] {
-  transition: linear 6s all !important;
+.progressBar[name="taxi"] {
+  animation-duration: 3s;
 }
 
-.progressBar.done[name="tram"] {
-  transition: linear 12s all !important;
+.progressBar[name="bus"] {
+  animation-duration: 6s;
 }
 
-.progressBar.done[name="ferry"] {
-  transition: linear 24s all !important;
+.progressBar[name="tram"] {
+  animation-duration: 12s;
 }
 
-.progressBar.done[name="subway"] {
-  transition: linear 48s all !important;
+.progressBar[name="ferry"] {
+  animation-duration: 24s;
 }
 
-.progressBar.done[name="train"] {
-  transition: linear 96s all !important;
+.progressBar[name="subway"] {
+  animation-duration: 48s;
 }
 
-.progressBar.done[name="planerent"] {
-  transition: linear 192s all !important;
+.progressBar[name="train"] {
+  animation-duration: 96s;
 }
 
-.progressBar.done[name="smplane"] {
-  transition: linear 384s all !important;
+.progressBar[name="planerent"] {
+  animation-duration: 192s;
 }
 
-.progressBar.done[name="mdplane"] {
-  transition: linear 768s all !important;
+.progressBar[name="smplane"] {
+  animation-duration: 384s;
 }
 
-.progressBar.done[name="lgplane"] {
-  transition: linear 1536s all !important;
+.progressBar[name="mdplane"] {
+  animation-duration: 768s;
 }
 
-.progressBar.done[name="lgship"] {
-  transition: linear 3072s all !important;
+.progressBar[name="lgplane"] {
+  animation-duration: 1536s;
+}
+
+.progressBar[name="lgship"] {
+  animation-duration: 3072s;
 }
