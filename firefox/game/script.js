@@ -14,7 +14,7 @@ let data = {
 		dollar: 20,
 		cost: 200,
 		ceo: 40000,
-		hasCEO: false
+        hasCEO: false
 	},
 	taxi: {
 		ident: 'taxi',
@@ -168,7 +168,21 @@ const UI = {
             window: document.getElementById('summary'),
             amount: document.getElementById('summary-amount')
         }
-	},
+    },
+    row: {
+        bike: document.getElementById('bike'),
+        taxi: document.getElementById('taxi'),
+        bus: document.getElementById('bus'),
+        tram: document.getElementById('tram'),
+        ferry: document.getElementById('ferry'),
+        subway: document.getElementById('subway'),
+        train: document.getElementById('train'),
+        planerent: document.getElementById('planerent'),
+        smplane: document.getElementById('smplane'),
+        mdplane: document.getElementById('mdplane'),
+        lgplane: document.getElementById('lgplane'),
+        lgship: document.getElementById('lgship')
+    },
 	text: {
 		score: document.getElementById('userScore')
 	}
@@ -245,15 +259,15 @@ function save() {
  * @param {EventTarget} el 
  */
 function handleButtons(el) {
-    const type = el.target.name;
+    const type = el.target.parentNode.parentNode.id;
     switch (el.target.className) {
 
-        case 'runButton':
+        case 'work':
             playSound('button');
             cycle(type);
             break;
 
-        case 'upgradeButton':
+        case 'buy':
             upgrade(type);
             break;
 
@@ -261,7 +275,7 @@ function handleButtons(el) {
             hireCEO(type);
             break;
 
-        case 'showInformation':
+        case 'info':
             playSound('button');
             showInfo(type);
             toggleInfo(true);
@@ -300,7 +314,7 @@ function playSound(sound) {
 function showInfo(type) {
     const vehicle = data[type];
 
-    UI.screen.information.title.textContent = document.getElementsByName(vehicle.ident)[1].textContent;
+    UI.screen.information.title.textContent = UI.row[vehicle.ident].getElementsByClassName('bar')[0].textContent;
     UI.screen.information.owned.textContent = vehicle.units;
     UI.screen.information.profit.textContent = minifyNumber(vehicle.dollar);
 
@@ -394,9 +408,9 @@ function hireCEO(type) {
  * @param {string} type 
  */
 function cycle(type) {
-	const vehicle = data[type];
-	const progressBar = document.getElementsByName(vehicle.ident)[1];
-	const button = document.getElementsByName(vehicle.ident)[2];
+    const vehicle = data[type];
+	const progressBar = UI.row[vehicle.ident].getElementsByClassName('bar')[0];
+	const button = UI.row[vehicle.ident].getElementsByClassName('work')[0];
 	let currentTime = Date.now();
 	
 	vehicle.running = true;
@@ -419,7 +433,7 @@ function cycle(type) {
  */
 function cycleEnd(alarmInfo) {
 	const vehicle = data[alarmInfo.name];
-	const button = document.getElementsByName(vehicle.ident)[2];
+	const button = UI.row[vehicle.ident].getElementsByClassName('work')[0];
 	
 	vehicle.running = false;
 	vehicle.lastrun = 0;
@@ -451,7 +465,7 @@ function upgrade(type) {
 		vehicle.units++;
 		vehicle.cost = (vehicle.cost * 1.05).toFixed(2);
 
-        document.getElementsByName(type)[0].textContent = vehicle.units;
+        UI.row[vehicle.ident].getElementsByClassName('count')[0].textContent = vehicle.units;
         
 		playSound('buy');
         updateScore();
@@ -596,8 +610,8 @@ function loadGame(saved) {
 				data.score += vehicle[i].dollar;
 			} else if (((dateNow - vehicle[i].lastrun) < vehicle[i].time) && ((dateNow - vehicle[i].lastrun) > -vehicle[i].time)) {
 				// Resume the work cycle if the vehicle cycle is still in progress
-				const progressBar = document.getElementsByName(vehicle[i].ident)[1];
-				const button = document.getElementsByName(vehicle[i].ident)[2];
+				const progressBar = UI.row[vehicle[i].ident].getElementsByClassName('bar')[0];
+				const button = UI.row[vehicle[i].ident].getElementsByClassName('work')[0];
 				
 				vehicle[i].running = true;
 				
@@ -617,7 +631,7 @@ function loadGame(saved) {
 
     // Setup unit counters and start work
     for (let i = 0; i < vehicle.length; i++) {
-		document.getElementsByName(vehicle[i].ident)[0].textContent = vehicle[i].units;
+		UI.row[vehicle[i].ident].getElementsByClassName('count')[0].textContent = vehicle[i].units;
     }
 
     // Setup current prices
@@ -692,32 +706,36 @@ function statusCheck() {
 	];
 	
     for (let i = 0; i < vehicle.length; i++) {
-		// Check if player can afford to purchase vehicle
+        let button;
+        // Check if player can afford to purchase vehicle
+        button = UI.row[vehicle[i].ident].getElementsByClassName('buy')[0];
         if (data.score >= vehicle[i].cost) {
-            document.getElementsByName(vehicle[i].ident)[3].disabled = false;
+            button.disabled = false;
         } else {
-            document.getElementsByName(vehicle[i].ident)[3].disabled = true;
+            button.disabled = true;
 		}
 		
-		// Check if player can afford a CEO
+        // Check if player can afford a CEO
+        button = UI.row[vehicle[i].ident].getElementsByClassName('hire')[0];
         if (data.score >= vehicle[i].ceo) {
-            document.getElementsByName(vehicle[i].ident)[4].disabled = false;
+            button.disabled = false;
         } else {
-            document.getElementsByName(vehicle[i].ident)[4].disabled = true;
+            button.disabled = true;
 		}
 		
 		// Check that player doesn't have a CEO already
-		// and that they own at least 1 vehicle
+        // and that they own at least 1 vehicle
+        button = UI.row[vehicle[i].ident].getElementsByClassName('work')[0];
         if (vehicle[i].units > 0 && !(vehicle[i].hasCEO)) {
-            document.getElementsByName(vehicle[i].ident)[2].disabled = false;
+            button.disabled = false;
         } else {
-            document.getElementsByName(vehicle[i].ident)[2].disabled = true;
-            document.getElementsByName(vehicle[i].ident)[4].disabled = true;
+            button.disabled = true;
+            UI.row[vehicle[i].ident].getElementsByClassName('hire')[0].disabled = true;
 		}
 		
 		// Check if vehicle cycle is running
         if (vehicle[i].running) {
-            document.getElementsByName(vehicle[i].ident)[2].disabled = true;
+            button.disabled = true;
         }
     }
 }

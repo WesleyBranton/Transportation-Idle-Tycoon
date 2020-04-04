@@ -94,12 +94,12 @@ button {
   cursor: pointer;
 }
 
-button.runButton {
+button.work {
   background-color: #309c4d;
   border-bottom: 3px solid #24753a;
 }
 
-button.upgradeButton {
+button.buy {
   background-color: #3366ff;
   border-bottom: 3px solid #0040ff;
 }
@@ -112,7 +112,7 @@ button.closeSummary {
   border-bottom: 3px solid #cc2900;
 }
 
-button.showInformation {
+button.info {
   background-color: #9933ff;
   border-bottom: 3px solid #8000ff;
   cursor: help;
@@ -125,7 +125,7 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.progressBar {
+.bar {
   width: 50%;
   padding-left: 10px;
   border-radius: 5px;
@@ -154,50 +154,50 @@ button:disabled {
   }
 }
 
-.progressBar[name="bike"] {
-  animation-duration: .5s !important;
+#bike .bar {
+  animation-duration: .5s;
 }
 
-.progressBar[name="taxi"] {
+#taxi .bar {
   animation-duration: 3s;
 }
 
-.progressBar[name="bus"] {
+#bus .bar {
   animation-duration: 6s;
 }
 
-.progressBar[name="tram"] {
+#tram .bar {
   animation-duration: 12s;
 }
 
-.progressBar[name="ferry"] {
+#ferry .bar {
   animation-duration: 24s;
 }
 
-.progressBar[name="subway"] {
+#subway .bar {
   animation-duration: 48s;
 }
 
-.progressBar[name="train"] {
+#train .bar {
   animation-duration: 96s;
 }
 
-.progressBar[name="planerent"] {
+#planerent .bar {
   animation-duration: 192s;
 }
 
-.progressBar[name="smplane"] {
+#smplane .bar {
   animation-duration: 384s;
 }
 
-.progressBar[name="mdplane"] {
+#mdplane .bar {
   animation-duration: 768s;
 }
 
-.progressBar[name="lgplane"] {
+#lgplane .bar {
   animation-duration: 1536s;
 }
 
-.progressBar[name="lgship"] {
+#lgship .bar {
   animation-duration: 3072s;
 }
