@@ -48,12 +48,9 @@ body {
   min-width: 600px;
 }
 
-.showScreen {
-  display: table;
-}
-
-.hideScreen {
-  display: none;
+.hide {
+  position: fixed;
+  top: -100000000px;
 }
 
 #information,

@@ -334,11 +334,11 @@ function showInfo(type) {
  */
 function toggleInfo(show) {
     if (show) {
-        UI.screen.game.window.className = 'hideScreen';
-        UI.screen.information.window.className = 'showScreen';
+        UI.screen.information.window.classList.remove('hide');
+        UI.screen.game.window.classList.add('hide');
     } else {
-        UI.screen.information.window.className = 'hideScreen';
-        UI.screen.game.window.className = 'showScreen';
+        UI.screen.information.window.classList.add('hide');
+        UI.screen.game.window.classList.remove('hide');
     }
 }
 
@@ -347,16 +347,14 @@ function toggleInfo(show) {
  * @param {boolean} show 
  */
 function toggleSummary(show) {
-    if (UI.screen.loading.window) {
-        UI.screen.loading.window.parentElement.removeChild(UI.screen.loading.window);
-    }
+    UI.screen.loading.window.classList.add('hide');
 
     if (show) {
-        UI.screen.game.window.className = 'hideScreen';
-        UI.screen.summary.window.className = 'showScreen';
+        UI.screen.summary.window.classList.remove('hide');
+        UI.screen.game.window.classList.add('hide');
     } else {
-        UI.screen.summary.window.className = 'hideScreen';
-        UI.screen.game.window.className = 'showScreen';
+        UI.screen.summary.window.classList.add('hide');
+        UI.screen.game.window.classList.remove('hide');
     }
 }
 
