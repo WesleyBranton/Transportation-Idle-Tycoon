@@ -6,136 +6,160 @@
 let data = {
 	score: 200,
 	bike: {
-		ident: 'bike',
+		id: 'bike',
 		running: false,
 		lastrun: 0,
 		time: 500,
 		units: 0,
 		dollar: 20,
 		cost: 200,
-		ceo: 40000,
-        hasCEO: false
+		ceo: {
+            cost: 40000,
+            has: false
+        }
 	},
 	taxi: {
-		ident: 'taxi',
+		id: 'taxi',
 		running: false,
 		lastrun: 0,
 		time: 3000,
 		units: 0,
 		dollar: 300,
-		cost: 3600,
-		ceo: 700000,
-		hasCEO: false
+        cost: 3600,
+        ceo: {
+            cost: 700000,
+            has: false
+        }
 	},
 	bus: {
-		ident: 'bus',
+		id: 'bus',
 		running: false,
 		lastrun: 0,
 		time: 6000,
 		units: 0,
 		dollar: 6200,
-		cost: 64800,
-		ceo: 13000000,
-		hasCEO: false
+        cost: 64800,
+        ceo: {
+            cost: 13000000,
+            has: false
+        }
 	},
 	tram: {
-		ident: 'tram',
+		id: 'tram',
 		running: false,
 		lastrun: 0,
 		time: 12000,
 		units: 0,
 		dollar: 21917500,
-		cost: 25300000,
-		ceo: 230000000,
-		hasCEO: false
+        cost: 25300000,
+        ceo: {
+            cost: 230000000,
+            has: false
+        }
 	},
 	ferry: {
-		ident: 'ferry',
+		id: 'ferry',
 		running: false,
 		lastrun: 0,
 		time: 24000,
 		units: 0,
 		dollar: 5800000,
-		cost: 20995200,
-		ceo: 4200000000,
-		hasCEO: false
+        cost: 20995200,
+        ceo: {
+            cost: 4200000000,
+            has: false
+        }
 	},
 	subway: {
-		ident: 'subway',
+		id: 'subway',
 		running: false,
 		lastrun: 0,
 		time: 48000,
 		units: 0,
 		dollar: 41570496,
-		cost: 377913600,
-		ceo: 75000000000,
-		hasCEO: false
+        cost: 377913600,
+        ceo: {
+            cost: 75000000000,
+            has: false
+        }
 	},
 	train: {
-		ident: 'train',
+		id: 'train',
 		running: false,
 		lastrun: 0,
 		time: 96000,
 		units: 0,
 		dollar: 748268928,
-		cost: 6802444800,
-		ceo: 1400000000000,
-		hasCEO: false
+        cost: 6802444800,
+        ceo: {
+            cost: 1400000000000,
+            has: false
+        }
 	},
 	planerent: {
-		ident: 'planerent',
+		id: 'planerent',
 		running: false,
 		lastrun: 0,
 		time: 192000,
 		units: 0,
 		dollar: 13468840704,
-		cost: 122444006400,
-		ceo: 2000.00,
-		hasCEO: false
+        cost: 122444006400,
+        ceo: {
+            cost: 2000,
+            has: false
+        }
 	},
 	smplane: {
-		ident: 'smplane',
+		id: 'smplane',
 		running: false,
 		lastrun: 0,
 		time: 384000,
 		units: 0,
 		dollar: 242439132672,
-		cost: 2203992115200,
-		ceo: 24500000000000,
-		hasCEO: false
+        cost: 2203992115200,
+        ceo: {
+            cost: 24500000000000,
+            has: false
+        }
 	},
 	mdplane: {
-		ident: 'mdplane',
+		id: 'mdplane',
 		running: false,
 		lastrun: 0,
 		time: 768000,
 		units: 0,
 		dollar: 4363904388096,
-		cost: 39671858073600,
-		ceo: 8000000000000000,
-		hasCEO: false
+        cost: 39671858073600,
+        ceo: {
+            cost: 8000000000000000,
+            has: false
+        }
 	},
 	lgplane: {
-		ident: 'lgplane',
+		id: 'lgplane',
 		running: false,
 		lastrun: 0,
 		time: 1536000,
 		units: 0,
 		dollar: 78550278985728,
-		cost: 714093445324800,
-		ceo: 140000000000000000,
-		hasCEO: false
+        cost: 714093445324800,
+        ceo: {
+            cost: 140000000000000000,
+            has: false
+        }
 	},
 	lgship: {
-		ident: 'lgship',
+		id: 'lgship',
 		running: false,
 		lastrun: 0,
 		time: 3072000,
 		units: 0,
 		dollar: 1413905021743104,
-		cost: 12853682015846400,
-		ceo: 2600000000000000000,
-		hasCEO: false
+        cost: 12853682015846400,
+        ceo: {
+            cost: 2600000000000000000,
+            has: false
+        }
 	}
 };
 
@@ -223,18 +247,18 @@ function save() {
             mdplane_units: data.mdplane.units,
             airliner_units: data.lgplane.units,
             cruiseliner_units: data.lgship.units,
-            bike_ceo: data.bike.hasCEO,
-            taxi_ceo: data.taxi.hasCEO,
-            bus_ceo: data.bus.hasCEO,
-            tram_ceo: data.tram.hasCEO,
-            ferry_ceo: data.ferry.hasCEO,
-            subway_ceo: data.subway.hasCEO,
-            train_ceo: data.train.hasCEO,
-            planerent_ceo: data.planerent.hasCEO,
-            smplane_ceo: data.smplane.hasCEO,
-            mdplane_ceo: data.mdplane.hasCEO,
-            airliner_ceo: data.lgplane.hasCEO,
-            cruiseliner_ceo: data.lgship.hasCEO,
+            bike_ceo: data.bike.ceo.has,
+            taxi_ceo: data.taxi.ceo.has,
+            bus_ceo: data.bus.ceo.has,
+            tram_ceo: data.tram.ceo.has,
+            ferry_ceo: data.ferry.ceo.has,
+            subway_ceo: data.subway.ceo.has,
+            train_ceo: data.train.ceo.has,
+            planerent_ceo: data.planerent.ceo.has,
+            smplane_ceo: data.smplane.ceo.has,
+            mdplane_ceo: data.mdplane.ceo.has,
+            airliner_ceo: data.lgplane.ceo.has,
+            cruiseliner_ceo: data.lgship.ceo.has,
             bike_lastrun: data.bike.lastrun,
             taxi_lastrun: data.taxi.lastrun,
             bus_lastrun: data.bus.lastrun,
@@ -314,7 +338,7 @@ function playSound(sound) {
 function showInfo(type) {
     const vehicle = data[type];
 
-    UI.screen.information.title.textContent = UI.row[vehicle.ident].getElementsByClassName('bar')[0].textContent;
+    UI.screen.information.title.textContent = UI.row[vehicle.id].getElementsByClassName('bar')[0].textContent;
     UI.screen.information.owned.textContent = vehicle.units;
     UI.screen.information.profit.textContent = minifyNumber(vehicle.dollar);
 
@@ -333,9 +357,9 @@ function showInfo(type) {
     }
 
     UI.screen.information.cost.textContent = minifyNumber(vehicle.cost);
-    UI.screen.information.salary.textContent = minifyNumber(vehicle.ceo);
+    UI.screen.information.salary.textContent = minifyNumber(vehicle.ceo.cost);
 
-    if (vehicle.hasCEO) {
+    if (vehicle.ceo.has) {
         UI.screen.information.ceo.textContent = 'Yes';
     } else {
         UI.screen.information.ceo.textContent = 'No';
@@ -392,9 +416,9 @@ function updateScore() {
 function hireCEO(type) {
 	const vehicle = data[type];
 	
-    if (data.score >= vehicle.ceo) {
-        data.score -= vehicle.ceo;
-		vehicle.hasCEO = true;
+    if (data.score >= vehicle.ceo.cost) {
+        data.score -= vehicle.ceo.cost;
+		vehicle.ceo.has = true;
 		playSound('buy');
         updateScore();
         cycle(type);
@@ -409,8 +433,8 @@ function hireCEO(type) {
  */
 function cycle(type) {
     const vehicle = data[type];
-	const progressBar = UI.row[vehicle.ident].getElementsByClassName('bar')[0];
-	const button = UI.row[vehicle.ident].getElementsByClassName('work')[0];
+	const progressBar = UI.row[vehicle.id].getElementsByClassName('bar')[0];
+	const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
 	let currentTime = Date.now();
 	
 	vehicle.running = true;
@@ -420,7 +444,7 @@ function cycle(type) {
 	button.disabled = true;
 	startAnimation(progressBar);
     
-    browser.alarms.create(vehicle.ident, {
+    browser.alarms.create(vehicle.id, {
         when: currentTime
 	});
 	
@@ -433,7 +457,7 @@ function cycle(type) {
  */
 function cycleEnd(alarmInfo) {
 	const vehicle = data[alarmInfo.name];
-	const button = UI.row[vehicle.ident].getElementsByClassName('work')[0];
+	const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
 	
 	vehicle.running = false;
 	vehicle.lastrun = 0;
@@ -442,11 +466,11 @@ function cycleEnd(alarmInfo) {
 	
 	button.disabled = false;
 	
-    if (vehicle.hasCEO) {
+    if (vehicle.ceo.has) {
 		button.disabled = true;
 		
         setTimeout(() => {
-            cycle(vehicle.ident)
+            cycle(vehicle.id)
         }, 100);
 	}
 	
@@ -465,7 +489,7 @@ function upgrade(type) {
 		vehicle.units++;
 		vehicle.cost = (vehicle.cost * 1.05).toFixed(2);
 
-        UI.row[vehicle.ident].getElementsByClassName('count')[0].textContent = vehicle.units;
+        UI.row[vehicle.id].getElementsByClassName('count')[0].textContent = vehicle.units;
         
 		playSound('buy');
         updateScore();
@@ -497,18 +521,18 @@ function loadGame(saved) {
         data.lgship.units = saved.gamedata.cruiseliner_units;
 
         // Load saved CEO data
-        data.bike.hasCEO = saved.gamedata.bike_ceo;
-        data.taxi.hasCEO = saved.gamedata.taxi_ceo;
-        data.bus.hasCEO = saved.gamedata.bus_ceo;
-        data.tram.hasCEO = saved.gamedata.tram_ceo;
-        data.ferry.hasCEO = saved.gamedata.ferry_ceo;
-        data.subway.hasCEO = saved.gamedata.subway_ceo;
-        data.train.hasCEO = saved.gamedata.train_ceo;
-        data.planerent.hasCEO = saved.gamedata.planerent_ceo;
-        data.smplane.hasCEO = saved.gamedata.smplane_ceo;
-        data.mdplane.hasCEO = saved.gamedata.mdplane_ceo;
-        data.lgplane.hasCEO = saved.gamedata.airliner_ceo;
-        data.lgship.hasCEO = saved.gamedata.cruiseliner_ceo;
+        data.bike.ceo.has = saved.gamedata.bike_ceo;
+        data.taxi.ceo.has = saved.gamedata.taxi_ceo;
+        data.bus.ceo.has = saved.gamedata.bus_ceo;
+        data.tram.ceo.has = saved.gamedata.tram_ceo;
+        data.ferry.ceo.has = saved.gamedata.ferry_ceo;
+        data.subway.ceo.has = saved.gamedata.subway_ceo;
+        data.train.ceo.has = saved.gamedata.train_ceo;
+        data.planerent.ceo.has = saved.gamedata.planerent_ceo;
+        data.smplane.ceo.has = saved.gamedata.smplane_ceo;
+        data.mdplane.ceo.has = saved.gamedata.mdplane_ceo;
+        data.lgplane.ceo.has = saved.gamedata.airliner_ceo;
+        data.lgship.ceo.has = saved.gamedata.cruiseliner_ceo;
 
         // Load last runs
         data.bike.lastrun = saved.gamedata.bike_lastrun;
@@ -592,7 +616,7 @@ function loadGame(saved) {
 
 		let dateNow = Date.now();
 		// Add money earned by automatic processes while away (if there's a CEO)
-        if (vehicle[i].hasCEO) {
+        if (vehicle[i].ceo.has) {
 			if ((dateNow - vehicle[i].lastrun) >= vehicle[i].time) {
 				data.score += Math.floor(dateDiff / vehicle[i].time) * vehicle[i].dollar * vehicle[i].units;
 				const completed = dateDiff % vehicle[i].time;
@@ -610,8 +634,8 @@ function loadGame(saved) {
 				data.score += vehicle[i].dollar;
 			} else if (((dateNow - vehicle[i].lastrun) < vehicle[i].time) && ((dateNow - vehicle[i].lastrun) > -vehicle[i].time)) {
 				// Resume the work cycle if the vehicle cycle is still in progress
-				const progressBar = UI.row[vehicle[i].ident].getElementsByClassName('bar')[0];
-				const button = UI.row[vehicle[i].ident].getElementsByClassName('work')[0];
+				const progressBar = UI.row[vehicle[i].id].getElementsByClassName('bar')[0];
+				const button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
 				
 				vehicle[i].running = true;
 				
@@ -619,7 +643,7 @@ function loadGame(saved) {
 				const animationDelay = (vehicle[i].lastrun - dateNow - vehicle[i].time) / 1000;
 				startDelayedAnimation(progressBar, animationDelay);
 				
-				browser.alarms.create(vehicle[i].ident, {
+				browser.alarms.create(vehicle[i].id, {
 					when: vehicle[i].lastrun
 				});
 			}
@@ -631,7 +655,7 @@ function loadGame(saved) {
 
     // Setup unit counters and start work
     for (let i = 0; i < vehicle.length; i++) {
-		UI.row[vehicle[i].ident].getElementsByClassName('count')[0].textContent = vehicle[i].units;
+		UI.row[vehicle[i].id].getElementsByClassName('count')[0].textContent = vehicle[i].units;
     }
 
     // Setup current prices
@@ -708,7 +732,7 @@ function statusCheck() {
     for (let i = 0; i < vehicle.length; i++) {
         let button;
         // Check if player can afford to purchase vehicle
-        button = UI.row[vehicle[i].ident].getElementsByClassName('buy')[0];
+        button = UI.row[vehicle[i].id].getElementsByClassName('buy')[0];
         if (data.score >= vehicle[i].cost) {
             button.disabled = false;
         } else {
@@ -716,8 +740,8 @@ function statusCheck() {
 		}
 		
         // Check if player can afford a CEO
-        button = UI.row[vehicle[i].ident].getElementsByClassName('hire')[0];
-        if (data.score >= vehicle[i].ceo) {
+        button = UI.row[vehicle[i].id].getElementsByClassName('hire')[0];
+        if (data.score >= vehicle[i].ceo.cost) {
             button.disabled = false;
         } else {
             button.disabled = true;
@@ -725,12 +749,12 @@ function statusCheck() {
 		
 		// Check that player doesn't have a CEO already
         // and that they own at least 1 vehicle
-        button = UI.row[vehicle[i].ident].getElementsByClassName('work')[0];
-        if (vehicle[i].units > 0 && !(vehicle[i].hasCEO)) {
+        button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
+        if (vehicle[i].units > 0 && !(vehicle[i].ceo.has)) {
             button.disabled = false;
         } else {
             button.disabled = true;
-            UI.row[vehicle[i].ident].getElementsByClassName('hire')[0].disabled = true;
+            UI.row[vehicle[i].id].getElementsByClassName('hire')[0].disabled = true;
 		}
 		
 		// Check if vehicle cycle is running
