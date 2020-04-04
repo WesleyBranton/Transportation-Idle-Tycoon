@@ -8,7 +8,7 @@ let data = {
 	bike: {
 		id: 'bike',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 500,
 		units: 0,
 		dollar: 20,
@@ -21,7 +21,7 @@ let data = {
 	taxi: {
 		id: 'taxi',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 3000,
 		units: 0,
 		dollar: 300,
@@ -34,7 +34,7 @@ let data = {
 	bus: {
 		id: 'bus',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 6000,
 		units: 0,
 		dollar: 6200,
@@ -47,7 +47,7 @@ let data = {
 	tram: {
 		id: 'tram',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 12000,
 		units: 0,
 		dollar: 21917500,
@@ -60,7 +60,7 @@ let data = {
 	ferry: {
 		id: 'ferry',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 24000,
 		units: 0,
 		dollar: 5800000,
@@ -73,7 +73,7 @@ let data = {
 	subway: {
 		id: 'subway',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 48000,
 		units: 0,
 		dollar: 41570496,
@@ -86,7 +86,7 @@ let data = {
 	train: {
 		id: 'train',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 96000,
 		units: 0,
 		dollar: 748268928,
@@ -96,10 +96,10 @@ let data = {
             has: false
         }
 	},
-	planerent: {
-		id: 'planerent',
+	plane_rental: {
+		id: 'plane_rental',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 192000,
 		units: 0,
 		dollar: 13468840704,
@@ -109,10 +109,10 @@ let data = {
             has: false
         }
 	},
-	smplane: {
-		id: 'smplane',
+	plane_small: {
+		id: 'plane_small',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 384000,
 		units: 0,
 		dollar: 242439132672,
@@ -122,10 +122,10 @@ let data = {
             has: false
         }
 	},
-	mdplane: {
-		id: 'mdplane',
+	plane_medium: {
+		id: 'plane_medium',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 768000,
 		units: 0,
 		dollar: 4363904388096,
@@ -135,10 +135,10 @@ let data = {
             has: false
         }
 	},
-	lgplane: {
-		id: 'lgplane',
+	plane_large: {
+		id: 'plane_large',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 1536000,
 		units: 0,
 		dollar: 78550278985728,
@@ -148,10 +148,10 @@ let data = {
             has: false
         }
 	},
-	lgship: {
-		id: 'lgship',
+	ship_large: {
+		id: 'ship_large',
 		running: false,
-		lastrun: 0,
+		end: 0,
 		time: 3072000,
 		units: 0,
 		dollar: 1413905021743104,
@@ -201,11 +201,11 @@ const UI = {
         ferry: document.getElementById('ferry'),
         subway: document.getElementById('subway'),
         train: document.getElementById('train'),
-        planerent: document.getElementById('planerent'),
-        smplane: document.getElementById('smplane'),
-        mdplane: document.getElementById('mdplane'),
-        lgplane: document.getElementById('lgplane'),
-        lgship: document.getElementById('lgship')
+        plane_rental: document.getElementById('plane_rental'),
+        plane_small: document.getElementById('plane_small'),
+        plane_medium: document.getElementById('plane_medium'),
+        plane_large: document.getElementById('plane_large'),
+        ship_large: document.getElementById('ship_large')
     },
 	text: {
 		score: document.getElementById('userScore')
@@ -213,7 +213,8 @@ const UI = {
 };
 
 browser.alarms.onAlarm.addListener(cycleEnd);
-browser.storage.local.get('gamedata', loadGame);
+let loaded = browser.storage.local.get();
+loaded.then(loadGame);
 UI.button.mute.addEventListener('click', toggleMute);
 
 /**
@@ -233,49 +234,80 @@ function toggleMute() {
  * Save game stats to browser storage
  */
 function save() {
-	browser.storage.local.set({
-        gamedata: {
-            bike_units: data.bike.units,
-            taxi_units: data.taxi.units,
-            bus_units: data.bus.units,
-            tram_units: data.tram.units,
-            ferry_units: data.ferry.units,
-            subway_units: data.subway.units,
-            train_units: data.train.units,
-            planerent_units: data.planerent.units,
-            smplane_units: data.smplane.units,
-            mdplane_units: data.mdplane.units,
-            airliner_units: data.lgplane.units,
-            cruiseliner_units: data.lgship.units,
-            bike_ceo: data.bike.ceo.has,
-            taxi_ceo: data.taxi.ceo.has,
-            bus_ceo: data.bus.ceo.has,
-            tram_ceo: data.tram.ceo.has,
-            ferry_ceo: data.ferry.ceo.has,
-            subway_ceo: data.subway.ceo.has,
-            train_ceo: data.train.ceo.has,
-            planerent_ceo: data.planerent.ceo.has,
-            smplane_ceo: data.smplane.ceo.has,
-            mdplane_ceo: data.mdplane.ceo.has,
-            airliner_ceo: data.lgplane.ceo.has,
-            cruiseliner_ceo: data.lgship.ceo.has,
-            bike_lastrun: data.bike.lastrun,
-            taxi_lastrun: data.taxi.lastrun,
-            bus_lastrun: data.bus.lastrun,
-            tram_lastrun: data.tram.lastrun,
-            ferry_lastrun: data.ferry.lastrun,
-            subway_lastrun: data.subway.lastrun,
-            train_lastrun: data.train.lastrun,
-            planerent_lastrun: data.planerent.lastrun,
-            smplane_lastrun: data.smplane.lastrun,
-            mdplane_lastrun: data.mdplane.lastrun,
-            airliner_lastrun: data.lgplane.lastrun,
-            cruiseliner_lastrun: data.lgship.lastrun,
-            score: data.score,
-            lastplayed: Date.now(),
-            mute: setting.mute
+    const write = {
+        storageVersion: 2,
+        settings: {
+            muted: setting.mute
+        },
+        data: {
+            score: data.score.toFixed(2),
+            left: Date.now(),
+            vehicle: {
+                bike: {
+                    units: data.bike.units,
+                    ceo: data.bike.ceo.has,
+                    end: data.bike.end
+                },
+                taxi: {
+                    units: data.taxi.units,
+                    ceo: data.taxi.ceo.has,
+                    end: data.taxi.end
+                },
+                bus: {
+                    units: data.bus.units,
+                    ceo: data.bus.ceo.has,
+                    end: data.bus.end
+                },
+                tram: {
+                    units: data.tram.units,
+                    ceo: data.tram.ceo.has,
+                    end: data.tram.end
+                },
+                ferry: {
+                    units: data.ferry.units,
+                    ceo: data.ferry.ceo.has,
+                    end: data.ferry.end
+                },
+                subway: {
+                    units: data.subway.units,
+                    ceo: data.subway.ceo.has,
+                    end: data.subway.end
+                },
+                train: {
+                    units: data.train.units,
+                    ceo: data.train.ceo.has,
+                    end: data.train.end
+                },
+                plane_rental: {
+                    units: data.plane_rental.units,
+                    ceo: data.plane_rental.ceo.has,
+                    end: data.plane_rental.end
+                },
+                plane_small: {
+                    units: data.plane_small.units,
+                    ceo: data.plane_small.ceo.has,
+                    end: data.plane_small.end
+                },
+                plane_medium: {
+                    units: data.plane_medium.units,
+                    ceo: data.plane_medium.ceo.has,
+                    end: data.plane_medium.end
+                },
+                plane_large: {
+                    units: data.plane_large.units,
+                    ceo: data.plane_large.ceo.has,
+                    end: data.plane_large.end
+                },
+                ship_large: {
+                    units: data.ship_large.units,
+                    ceo: data.ship_large.ceo.has,
+                    end: data.ship_large.end
+                }
+            }
         }
-    });
+    };
+
+	browser.storage.local.set(write);
 }
 
 /**
@@ -439,7 +471,7 @@ function cycle(type) {
 	
 	vehicle.running = true;
 	currentTime += vehicle.time;
-	vehicle.lastrun = currentTime;
+	vehicle.end = currentTime;
 
 	button.disabled = true;
 	startAnimation(progressBar);
@@ -460,7 +492,7 @@ function cycleEnd(alarmInfo) {
 	const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
 	
 	vehicle.running = false;
-	vehicle.lastrun = 0;
+	vehicle.end = 0;
     data.score += (vehicle.dollar * vehicle.units);
 	updateScore();
 	
@@ -505,84 +537,128 @@ function upgrade(type) {
 function loadGame(saved) {
 	let dateLeft;
 
-    if (saved.gamedata) {
+    if (saved.data) {
         // Load saved unit data
-        data.bike.units = saved.gamedata.bike_units;
-        data.taxi.units = saved.gamedata.taxi_units;
-        data.bus.units = saved.gamedata.bus_units;
-        data.tram.units = saved.gamedata.tram_units;
-        data.ferry.units = saved.gamedata.ferry_units;
-        data.subway.units = saved.gamedata.subway_units;
-        data.train.units = saved.gamedata.train_units;
-        data.planerent.units = saved.gamedata.planerent_units;
-        data.smplane.units = saved.gamedata.smplane_units;
-        data.mdplane.units = saved.gamedata.mdplane_units;
-        data.lgplane.units = saved.gamedata.airliner_units;
-        data.lgship.units = saved.gamedata.cruiseliner_units;
+        data.bike.units = saved.data.vehicle.bike.units;
+        data.taxi.units = saved.data.vehicle.taxi.units;
+        data.bus.units = saved.data.vehicle.bus.units;
+        data.tram.units = saved.data.vehicle.tram.units;
+        data.ferry.units = saved.data.vehicle.ferry.units;
+        data.subway.units = saved.data.vehicle.subway.units;
+        data.train.units = saved.data.vehicle.train.units;
+        data.plane_rental.units = saved.data.vehicle.plane_rental.units;
+        data.plane_small.units = saved.data.vehicle.plane_small.units;
+        data.plane_medium.units = saved.data.vehicle.plane_medium.units;
+        data.plane_large.units = saved.data.vehicle.plane_large.units;
+        data.ship_large.units = saved.data.vehicle.ship_large.units;
 
         // Load saved CEO data
-        data.bike.ceo.has = saved.gamedata.bike_ceo;
-        data.taxi.ceo.has = saved.gamedata.taxi_ceo;
-        data.bus.ceo.has = saved.gamedata.bus_ceo;
-        data.tram.ceo.has = saved.gamedata.tram_ceo;
-        data.ferry.ceo.has = saved.gamedata.ferry_ceo;
-        data.subway.ceo.has = saved.gamedata.subway_ceo;
-        data.train.ceo.has = saved.gamedata.train_ceo;
-        data.planerent.ceo.has = saved.gamedata.planerent_ceo;
-        data.smplane.ceo.has = saved.gamedata.smplane_ceo;
-        data.mdplane.ceo.has = saved.gamedata.mdplane_ceo;
-        data.lgplane.ceo.has = saved.gamedata.airliner_ceo;
-        data.lgship.ceo.has = saved.gamedata.cruiseliner_ceo;
+        data.bike.ceo.has = saved.data.vehicle.bike.ceo;
+        data.taxi.ceo.has = saved.data.vehicle.taxi.ceo;
+        data.bus.ceo.has = saved.data.vehicle.bus.ceo;
+        data.tram.ceo.has = saved.data.vehicle.tram.ceo;
+        data.ferry.ceo.has = saved.data.vehicle.ferry.ceo;
+        data.subway.ceo.has = saved.data.vehicle.subway.ceo;
+        data.train.ceo.has = saved.data.vehicle.train.ceo;
+        data.plane_rental.ceo.has = saved.data.vehicle.plane_rental.ceo;
+        data.plane_small.ceo.has = saved.data.vehicle.plane_small.ceo;
+        data.plane_medium.ceo.has = saved.data.vehicle.plane_medium.ceo;
+        data.plane_large.ceo.has = saved.data.vehicle.plane_large.ceo;
+        data.ship_large.ceo.has = saved.data.vehicle.ship_large.ceo;
 
         // Load last runs
-        data.bike.lastrun = saved.gamedata.bike_lastrun;
-        data.taxi.lastrun = saved.gamedata.taxi_lastrun;
-        data.bus.lastrun = saved.gamedata.bus_lastrun;
-        data.tram.lastrun = saved.gamedata.tram_lastrun;
-        data.ferry.lastrun = saved.gamedata.ferry_lastrun;
-        data.subway.lastrun = saved.gamedata.subway_lastrun;
-        data.train.lastrun = saved.gamedata.train_lastrun;
-        data.planerent.lastrun = saved.gamedata.planerent_lastrun;
-        data.smplane.lastrun = saved.gamedata.smplane_lastrun;
-        data.mdplane.lastrun = saved.gamedata.mdplane_lastrun;
-        data.lgplane.lastrun = saved.gamedata.airliner_lastrun;
-        data.lgship.lastrun = saved.gamedata.cruiseliner_lastrun;
+        data.bike.end = saved.data.vehicle.bike.end;
+        data.taxi.end = saved.data.vehicle.taxi.end;
+        data.bus.end = saved.data.vehicle.bus.end;
+        data.tram.end = saved.data.vehicle.tram.end;
+        data.ferry.end = saved.data.vehicle.ferry.end;
+        data.subway.end = saved.data.vehicle.subway.end;
+        data.train.end = saved.data.vehicle.train.end;
+        data.plane_rental.end = saved.data.vehicle.plane_rental.end;
+        data.plane_small.end = saved.data.vehicle.plane_small.end;
+        data.plane_medium.end = saved.data.vehicle.plane_medium.end;
+        data.plane_large.end = saved.data.vehicle.plane_large.end;
+        data.ship_large.end = saved.data.vehicle.ship_large.end;
 
         // Load other data
-        data.score = saved.gamedata.score;
-        setting.mute = saved.gamedata.mute;
-        dateLeft = saved.gamedata.lastplayed;
+        data.score = saved.data.score;
+        setting.mute = saved.settings.muted;
+        dateLeft = saved.data.lastplayed;
     } else {
-        browser.storage.local.set({
-            gamedata: {
-                bike_units: 0,
-                taxi_units: 0,
-                bus_units: 0,
-                tram_units: 0,
-                ferry_units: 0,
-                subway_units: 0,
-                train_units: 0,
-                planerent_units: 0,
-                smplane_units: 0,
-                mdplane_units: 0,
-                airliner_units: 0,
-                cruiseliner_units: 0,
-                bike_ceo: false,
-                taxi_ceo: false,
-                bus_ceo: false,
-                tram_ceo: false,
-                ferry_ceo: false,
-                subway_ceo: false,
-                train_ceo: false,
-                planerent_ceo: false,
-                smplane_ceo: false,
-                mdplane_ceo: false,
-                airliner_ceo: false,
-                cruiseliner_ceo: false,
+        const write = {
+            storageVersion: 2,
+            settings: {
+                muted: false
+            },
+            data: {
                 score: 200,
-                lastplayed: 1
+                left: 1,
+                vehicle: {
+                    bike: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    taxi: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    bus: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    tram: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    ferry: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    subway: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    train: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_rental: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_small: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_medium: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_large: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    ship_large: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    }
+                }
             }
-        });
+        };
+
+        browser.storage.local.set(write);
     }
 
     // Load mute status
@@ -601,11 +677,11 @@ function loadGame(saved) {
 		data.ferry,
 		data.subway,
 		data.train,
-		data.planerent,
-		data.smplane,
-		data.mdplane,
-		data.lgplane,
-		data.lgship
+		data.plane_rental,
+		data.plane_small,
+		data.plane_medium,
+		data.plane_large,
+		data.ship_large
 	];
 
     // Calculate income while away
@@ -617,22 +693,22 @@ function loadGame(saved) {
 		let dateNow = Date.now();
 		// Add money earned by automatic processes while away (if there's a CEO)
         if (vehicle[i].ceo.has) {
-			if ((dateNow - vehicle[i].lastrun) >= vehicle[i].time) {
+			if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
 				data.score += Math.floor(dateDiff / vehicle[i].time) * vehicle[i].dollar * vehicle[i].units;
 				const completed = dateDiff % vehicle[i].time;
 				const nextTime = dateNow + vehicle[i].time - completed
-				vehicle[i].lastrun = nextTime;
+				vehicle[i].end = nextTime;
 			}
 		}
 
-		if (vehicle[i].lastrun && vehicle[i].lastrun != 0) {
+		if (vehicle[i].end && vehicle[i].end != 0) {
 			// Handle if the vehicle has been run at all
 			
 
-			if ((dateNow - vehicle[i].lastrun) >= vehicle[i].time) {
+			if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
 				// Add completed time if a vehicle run was completed while game was closed
 				data.score += vehicle[i].dollar;
-			} else if (((dateNow - vehicle[i].lastrun) < vehicle[i].time) && ((dateNow - vehicle[i].lastrun) > -vehicle[i].time)) {
+			} else if (((dateNow - vehicle[i].end) < vehicle[i].time) && ((dateNow - vehicle[i].end) > -vehicle[i].time)) {
 				// Resume the work cycle if the vehicle cycle is still in progress
 				const progressBar = UI.row[vehicle[i].id].getElementsByClassName('bar')[0];
 				const button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
@@ -640,11 +716,11 @@ function loadGame(saved) {
 				vehicle[i].running = true;
 				
 				button.disabled = true;
-				const animationDelay = (vehicle[i].lastrun - dateNow - vehicle[i].time) / 1000;
+				const animationDelay = (vehicle[i].end - dateNow - vehicle[i].time) / 1000;
 				startDelayedAnimation(progressBar, animationDelay);
 				
 				browser.alarms.create(vehicle[i].id, {
-					when: vehicle[i].lastrun
+					when: vehicle[i].end
 				});
 			}
 		}
@@ -722,11 +798,11 @@ function statusCheck() {
 		data.ferry,
 		data.subway,
 		data.train,
-		data.planerent,
-		data.smplane,
-		data.mdplane,
-		data.lgplane,
-		data.lgship
+		data.plane_rental,
+		data.plane_small,
+		data.plane_medium,
+		data.plane_large,
+		data.ship_large
 	];
 	
     for (let i = 0; i < vehicle.length; i++) {

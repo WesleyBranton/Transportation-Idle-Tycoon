@@ -178,22 +178,22 @@ button:disabled {
   animation-duration: 96s;
 }
 
-#planerent .bar {
+#plane_rental .bar {
   animation-duration: 192s;
 }
 
-#smplane .bar {
+#plane_small .bar {
   animation-duration: 384s;
 }
 
-#mdplane .bar {
+#plane_medium .bar {
   animation-duration: 768s;
 }
 
-#lgplane .bar {
+#plane_large .bar {
   animation-duration: 1536s;
 }
 
-#lgship .bar {
+#ship_large .bar {
   animation-duration: 3072s;
 }
