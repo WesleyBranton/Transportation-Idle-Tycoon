@@ -324,11 +324,11 @@ function handleButtons(el) {
             break;
 
         case 'buy':
-            upgrade(type);
+            buy(type);
             break;
 
         case 'hire':
-            hireCEO(type);
+            hire(type);
             break;
 
         case 'info':
@@ -445,7 +445,7 @@ function updateScore() {
  * Hire a CEO
  * @param {string} type 
  */
-function hireCEO(type) {
+function hire(type) {
 	const vehicle = data[type];
 	
     if (data.score >= vehicle.ceo.cost) {
@@ -513,7 +513,7 @@ function cycleEnd(alarmInfo) {
  * Purchase a vehicle
  * @param {string} type 
  */
-function upgrade(type) {
+function buy(type) {
 	const vehicle = data[type];
 	
     if (data.score >= vehicle.cost) {
