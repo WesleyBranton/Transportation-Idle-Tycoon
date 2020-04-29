@@ -15,3 +15,11 @@ To develop and test the extension, you need to open the "about:debugging" page i
 Further documentation about developing Firefox extensions can be found [here](https://developer.mozilla.org/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension).
 
 ## Release Notes
+### Version 1.1
+* **[FIXED]** Progress bars are no longer frozen when opening game window
+* **[FIXED]** Progress bars no longer reset when viewing more information screen
+* **[FIXED]** Correct error when calculating money earned when game is closed
+* **[FIXED]** Audio no longer breaks during rapid button presses
+* **[FIXED]** Popup no longer shows excessive whitespace
+* **[CHANGED]** "Cruiseliner" is now called "Cruise Ship"
+* **[FIXED]** Various minor optimizations
