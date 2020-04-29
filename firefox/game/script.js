@@ -240,7 +240,7 @@ function save() {
             muted: setting.mute
         },
         data: {
-            score: data.score.toFixed(2),
+            score: data.score,
             left: Date.now(),
             vehicle: {
                 bike: {
