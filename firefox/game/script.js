@@ -405,10 +405,8 @@ function showInfo(type) {
 function toggleInfo(show) {
     if (show) {
         UI.screen.information.window.classList.remove('hide');
-        UI.screen.game.window.classList.add('hide');
     } else {
         UI.screen.information.window.classList.add('hide');
-        UI.screen.game.window.classList.remove('hide');
     }
 }
 
@@ -421,10 +419,8 @@ function toggleSummary(show) {
 
     if (show) {
         UI.screen.summary.window.classList.remove('hide');
-        UI.screen.game.window.classList.add('hide');
     } else {
         UI.screen.summary.window.classList.add('hide');
-        UI.screen.game.window.classList.remove('hide');
     }
 }
 
