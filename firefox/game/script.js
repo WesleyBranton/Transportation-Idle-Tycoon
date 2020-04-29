@@ -4,167 +4,167 @@
 
 // Variable setup
 let data = {
-	score: 200,
-	bike: {
-		id: 'bike',
-		running: false,
-		end: 0,
-		time: 500,
-		units: 0,
-		dollar: 20,
-		cost: 200,
-		ceo: {
+    score: 200,
+    bike: {
+        id: 'bike',
+        running: false,
+        end: 0,
+        time: 500,
+        units: 0,
+        dollar: 20,
+        cost: 200,
+        ceo: {
             cost: 40000,
             has: false
         }
-	},
-	taxi: {
-		id: 'taxi',
-		running: false,
-		end: 0,
-		time: 3000,
-		units: 0,
-		dollar: 300,
+    },
+    taxi: {
+        id: 'taxi',
+        running: false,
+        end: 0,
+        time: 3000,
+        units: 0,
+        dollar: 300,
         cost: 3600,
         ceo: {
             cost: 700000,
             has: false
         }
-	},
-	bus: {
-		id: 'bus',
-		running: false,
-		end: 0,
-		time: 6000,
-		units: 0,
-		dollar: 6200,
+    },
+    bus: {
+        id: 'bus',
+        running: false,
+        end: 0,
+        time: 6000,
+        units: 0,
+        dollar: 6200,
         cost: 64800,
         ceo: {
             cost: 13000000,
             has: false
         }
-	},
-	tram: {
-		id: 'tram',
-		running: false,
-		end: 0,
-		time: 12000,
-		units: 0,
-		dollar: 21917500,
+    },
+    tram: {
+        id: 'tram',
+        running: false,
+        end: 0,
+        time: 12000,
+        units: 0,
+        dollar: 21917500,
         cost: 25300000,
         ceo: {
             cost: 230000000,
             has: false
         }
-	},
-	ferry: {
-		id: 'ferry',
-		running: false,
-		end: 0,
-		time: 24000,
-		units: 0,
-		dollar: 5800000,
+    },
+    ferry: {
+        id: 'ferry',
+        running: false,
+        end: 0,
+        time: 24000,
+        units: 0,
+        dollar: 5800000,
         cost: 20995200,
         ceo: {
             cost: 4200000000,
             has: false
         }
-	},
-	subway: {
-		id: 'subway',
-		running: false,
-		end: 0,
-		time: 48000,
-		units: 0,
-		dollar: 41570496,
+    },
+    subway: {
+        id: 'subway',
+        running: false,
+        end: 0,
+        time: 48000,
+        units: 0,
+        dollar: 41570496,
         cost: 377913600,
         ceo: {
             cost: 75000000000,
             has: false
         }
-	},
-	train: {
-		id: 'train',
-		running: false,
-		end: 0,
-		time: 96000,
-		units: 0,
-		dollar: 748268928,
+    },
+    train: {
+        id: 'train',
+        running: false,
+        end: 0,
+        time: 96000,
+        units: 0,
+        dollar: 748268928,
         cost: 6802444800,
         ceo: {
             cost: 1400000000000,
             has: false
         }
-	},
-	plane_rental: {
-		id: 'plane_rental',
-		running: false,
-		end: 0,
-		time: 192000,
-		units: 0,
-		dollar: 13468840704,
+    },
+    plane_rental: {
+        id: 'plane_rental',
+        running: false,
+        end: 0,
+        time: 192000,
+        units: 0,
+        dollar: 13468840704,
         cost: 122444006400,
         ceo: {
             cost: 2000,
             has: false
         }
-	},
-	plane_small: {
-		id: 'plane_small',
-		running: false,
-		end: 0,
-		time: 384000,
-		units: 0,
-		dollar: 242439132672,
+    },
+    plane_small: {
+        id: 'plane_small',
+        running: false,
+        end: 0,
+        time: 384000,
+        units: 0,
+        dollar: 242439132672,
         cost: 2203992115200,
         ceo: {
             cost: 24500000000000,
             has: false
         }
-	},
-	plane_medium: {
-		id: 'plane_medium',
-		running: false,
-		end: 0,
-		time: 768000,
-		units: 0,
-		dollar: 4363904388096,
+    },
+    plane_medium: {
+        id: 'plane_medium',
+        running: false,
+        end: 0,
+        time: 768000,
+        units: 0,
+        dollar: 4363904388096,
         cost: 39671858073600,
         ceo: {
             cost: 8000000000000000,
             has: false
         }
-	},
-	plane_large: {
-		id: 'plane_large',
-		running: false,
-		end: 0,
-		time: 1536000,
-		units: 0,
-		dollar: 78550278985728,
+    },
+    plane_large: {
+        id: 'plane_large',
+        running: false,
+        end: 0,
+        time: 1536000,
+        units: 0,
+        dollar: 78550278985728,
         cost: 714093445324800,
         ceo: {
             cost: 140000000000000000,
             has: false
         }
-	},
-	ship_large: {
-		id: 'ship_large',
-		running: false,
-		end: 0,
-		time: 3072000,
-		units: 0,
-		dollar: 1413905021743104,
+    },
+    ship_large: {
+        id: 'ship_large',
+        running: false,
+        end: 0,
+        time: 3072000,
+        units: 0,
+        dollar: 1413905021743104,
         cost: 12853682015846400,
         ceo: {
             cost: 2600000000000000000,
             has: false
         }
-	}
+    }
 };
 
 let setting = {
-	mute: false
+    mute: false
 }
 
 const UI = {
@@ -207,9 +207,9 @@ const UI = {
         plane_large: document.getElementById('plane_large'),
         ship_large: document.getElementById('ship_large')
     },
-	text: {
-		score: document.getElementById('userScore')
-	}
+    text: {
+        score: document.getElementById('userScore')
+    }
 };
 
 browser.alarms.onAlarm.addListener(cycleEnd);
@@ -307,7 +307,7 @@ function save() {
         }
     };
 
-	browser.storage.local.set(write);
+    browser.storage.local.set(write);
 }
 
 /**
@@ -346,9 +346,9 @@ function handleButtons(el) {
             playSound('button');
             toggleSummary(false);
             break;
-	}
-	
-	save();
+    }
+
+    save();
 }
 
 /**
@@ -432,8 +432,8 @@ function updateScore() {
         UI.text.score.textContent = minifyNumber(data.score);
     } else {
         UI.text.score.textContent = data.score.toFixed(2);
-	}
-	
+    }
+
     statusCheck();
 }
 
@@ -442,12 +442,12 @@ function updateScore() {
  * @param {string} type 
  */
 function hire(type) {
-	const vehicle = data[type];
-	
+    const vehicle = data[type];
+
     if (data.score >= vehicle.ceo.cost) {
         data.score -= vehicle.ceo.cost;
-		vehicle.ceo.has = true;
-		playSound('buy');
+        vehicle.ceo.has = true;
+        playSound('buy');
         updateScore();
         cycle(type);
     } else {
@@ -461,22 +461,22 @@ function hire(type) {
  */
 function cycle(type) {
     const vehicle = data[type];
-	const progressBar = UI.row[vehicle.id].getElementsByClassName('bar')[0];
-	const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
-	let currentTime = Date.now();
-	
-	vehicle.running = true;
-	currentTime += vehicle.time;
-	vehicle.end = currentTime;
+    const progressBar = UI.row[vehicle.id].getElementsByClassName('bar')[0];
+    const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
+    let currentTime = Date.now();
 
-	button.disabled = true;
-	startAnimation(progressBar);
-    
+    vehicle.running = true;
+    currentTime += vehicle.time;
+    vehicle.end = currentTime;
+
+    button.disabled = true;
+    startAnimation(progressBar);
+
     browser.alarms.create(vehicle.id, {
         when: currentTime
-	});
-	
-	save();
+    });
+
+    save();
 }
 
 /**
@@ -484,25 +484,25 @@ function cycle(type) {
  * @param {Object} alarmInfo 
  */
 function cycleEnd(alarmInfo) {
-	const vehicle = data[alarmInfo.name];
-	const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
-	
-	vehicle.running = false;
-	vehicle.end = 0;
+    const vehicle = data[alarmInfo.name];
+    const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
+
+    vehicle.running = false;
+    vehicle.end = 0;
     data.score += (vehicle.dollar * vehicle.units);
-	updateScore();
-	
-	button.disabled = false;
-	
+    updateScore();
+
+    button.disabled = false;
+
     if (vehicle.ceo.has) {
-		button.disabled = true;
-		
+        button.disabled = true;
+
         setTimeout(() => {
             cycle(vehicle.id)
         }, 100);
-	}
-	
-	save();
+    }
+
+    save();
 }
 
 /**
@@ -510,16 +510,16 @@ function cycleEnd(alarmInfo) {
  * @param {string} type 
  */
 function buy(type) {
-	const vehicle = data[type];
-	
+    const vehicle = data[type];
+
     if (data.score >= vehicle.cost) {
-		data.score -= vehicle.cost;
-		vehicle.units++;
-		vehicle.cost = (vehicle.cost * 1.05).toFixed(2);
+        data.score -= vehicle.cost;
+        vehicle.units++;
+        vehicle.cost = (vehicle.cost * 1.05).toFixed(2);
 
         UI.row[vehicle.id].getElementsByClassName('count')[0].textContent = vehicle.units;
-        
-		playSound('buy');
+
+        playSound('buy');
         updateScore();
     } else {
         showError();
@@ -531,7 +531,7 @@ function buy(type) {
  * @param {Object} saved 
  */
 function loadGame(saved) {
-	let dateLeft;
+    let dateLeft;
 
     if (saved.data) {
         // Load saved unit data
@@ -666,68 +666,67 @@ function loadGame(saved) {
 
     // Gather tycoon objects
     const vehicle = [
-		data.bike,
-		data.taxi,
-		data.bus,
-		data.tram,
-		data.ferry,
-		data.subway,
-		data.train,
-		data.plane_rental,
-		data.plane_small,
-		data.plane_medium,
-		data.plane_large,
-		data.ship_large
-	];
+        data.bike,
+        data.taxi,
+        data.bus,
+        data.tram,
+        data.ferry,
+        data.subway,
+        data.train,
+        data.plane_rental,
+        data.plane_small,
+        data.plane_medium,
+        data.plane_large,
+        data.ship_large
+    ];
 
     // Calculate income while away
     const dateDiff = Date.now() - dateLeft;
-	const scoreBefore = data.score;
-	
+    const scoreBefore = data.score;
+
     for (let i = 0; i < vehicle.length; i++) {
 
-		let dateNow = Date.now();
-		// Add money earned by automatic processes while away (if there's a CEO)
+        let dateNow = Date.now();
+        // Add money earned by automatic processes while away (if there's a CEO)
         if (vehicle[i].ceo.has) {
-			if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
-				data.score += Math.floor(dateDiff / vehicle[i].time) * vehicle[i].dollar * vehicle[i].units;
-				const completed = dateDiff % vehicle[i].time;
-				const nextTime = dateNow + vehicle[i].time - completed
-				vehicle[i].end = nextTime;
-			}
-		}
+            if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
+                data.score += Math.floor(dateDiff / vehicle[i].time) * vehicle[i].dollar * vehicle[i].units;
+                const completed = dateDiff % vehicle[i].time;
+                const nextTime = dateNow + vehicle[i].time - completed
+                vehicle[i].end = nextTime;
+            }
+        }
 
-		if (vehicle[i].end && vehicle[i].end != 0) {
-			// Handle if the vehicle has been run at all
-			
+        if (vehicle[i].end && vehicle[i].end != 0) {
+            // Handle if the vehicle has been run at all
 
-			if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
-				// Add completed time if a vehicle run was completed while game was closed
-				data.score += vehicle[i].dollar;
-			} else if (((dateNow - vehicle[i].end) < vehicle[i].time) && ((dateNow - vehicle[i].end) > -vehicle[i].time)) {
-				// Resume the work cycle if the vehicle cycle is still in progress
-				const progressBar = UI.row[vehicle[i].id].getElementsByClassName('bar')[0];
-				const button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
-				
-				vehicle[i].running = true;
-				
-				button.disabled = true;
-				const animationDelay = (vehicle[i].end - dateNow - vehicle[i].time) / 1000;
-				startDelayedAnimation(progressBar, animationDelay);
-				
-				browser.alarms.create(vehicle[i].id, {
-					when: vehicle[i].end
-				});
-			}
-		}
-	}
-	
-	// Calculate difference in score
+            if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
+                // Add completed time if a vehicle run was completed while game was closed
+                data.score += vehicle[i].dollar;
+            } else if (((dateNow - vehicle[i].end) < vehicle[i].time) && ((dateNow - vehicle[i].end) > -vehicle[i].time)) {
+                // Resume the work cycle if the vehicle cycle is still in progress
+                const progressBar = UI.row[vehicle[i].id].getElementsByClassName('bar')[0];
+                const button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
+
+                vehicle[i].running = true;
+
+                button.disabled = true;
+                const animationDelay = (vehicle[i].end - dateNow - vehicle[i].time) / 1000;
+                startDelayedAnimation(progressBar, animationDelay);
+
+                browser.alarms.create(vehicle[i].id, {
+                    when: vehicle[i].end
+                });
+            }
+        }
+    }
+
+    // Calculate difference in score
     const scoreDiff = data.score - scoreBefore;
 
     // Setup unit counters and start work
     for (let i = 0; i < vehicle.length; i++) {
-		UI.row[vehicle[i].id].getElementsByClassName('count')[0].textContent = vehicle[i].units;
+        UI.row[vehicle[i].id].getElementsByClassName('count')[0].textContent = vehicle[i].units;
     }
 
     // Setup current prices
@@ -743,8 +742,8 @@ function loadGame(saved) {
         toggleSummary(true);
     } else {
         toggleSummary(false);
-	}
-	
+    }
+
     updateScore();
     document.body.addEventListener('click', handleButtons);
 }
@@ -755,7 +754,7 @@ function loadGame(saved) {
  * @returns {number} Formatted number
  */
 function minifyNumber(num) {
-	num = parseFloat(num);
+    num = parseFloat(num);
 
     if (num >= 1000000000000000000000000000000) {
         num = (num / 1000000000000000000000000000000).toFixed(3) + 'N';
@@ -777,8 +776,8 @@ function minifyNumber(num) {
         num = (num / 1000000).toFixed(3) + 'M';
     } else {
         num = num.toFixed(2);
-	}
-	
+    }
+
     return num;
 }
 
@@ -786,21 +785,21 @@ function minifyNumber(num) {
  * Enable/Disable buttons (as required)
  */
 function statusCheck() {
-	const vehicle = [
-		data.bike,
-		data.taxi,
-		data.bus,
-		data.tram,
-		data.ferry,
-		data.subway,
-		data.train,
-		data.plane_rental,
-		data.plane_small,
-		data.plane_medium,
-		data.plane_large,
-		data.ship_large
-	];
-	
+    const vehicle = [
+        data.bike,
+        data.taxi,
+        data.bus,
+        data.tram,
+        data.ferry,
+        data.subway,
+        data.train,
+        data.plane_rental,
+        data.plane_small,
+        data.plane_medium,
+        data.plane_large,
+        data.ship_large
+    ];
+
     for (let i = 0; i < vehicle.length; i++) {
         let button;
         // Check if player can afford to purchase vehicle
@@ -809,17 +808,17 @@ function statusCheck() {
             button.disabled = false;
         } else {
             button.disabled = true;
-		}
-		
+        }
+
         // Check if player can afford a CEO
         button = UI.row[vehicle[i].id].getElementsByClassName('hire')[0];
         if (data.score >= vehicle[i].ceo.cost) {
             button.disabled = false;
         } else {
             button.disabled = true;
-		}
-		
-		// Check that player doesn't have a CEO already
+        }
+
+        // Check that player doesn't have a CEO already
         // and that they own at least 1 vehicle
         button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
         if (vehicle[i].units > 0 && !(vehicle[i].ceo.has)) {
@@ -827,9 +826,9 @@ function statusCheck() {
         } else {
             button.disabled = true;
             UI.row[vehicle[i].id].getElementsByClassName('hire')[0].disabled = true;
-		}
-		
-		// Check if vehicle cycle is running
+        }
+
+        // Check if vehicle cycle is running
         if (vehicle[i].running) {
             button.disabled = true;
         }
@@ -841,10 +840,10 @@ function statusCheck() {
  * @param {HTMLElement} bar 
  */
 function startAnimation(bar) {
-	bar.classList.remove('play');
-	bar.removeAttribute('style');
-	void bar.offsetWidth;
-	bar.classList.add('play');
+    bar.classList.remove('play');
+    bar.removeAttribute('style');
+    void bar.offsetWidth;
+    bar.classList.add('play');
 }
 
 /**
@@ -853,8 +852,8 @@ function startAnimation(bar) {
  * @param {number} delay
  */
 function startDelayedAnimation(bar, delay) {
-	bar.classList.remove('play');
-	bar.setAttribute('style', 'animation-delay: ' + delay + 's;');
-	void bar.offsetWidth;
-	bar.classList.add('play');
+    bar.classList.remove('play');
+    bar.setAttribute('style', 'animation-delay: ' + delay + 's;');
+    void bar.offsetWidth;
+    bar.classList.add('play');
 }

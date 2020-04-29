@@ -6,18 +6,22 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="style.css" />
+  <title>Transportation Idle Tycoon</title>
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
+  <!-- Audio files -->
   <audio id="sound-button">
     <source src="audio/click.ogg" type="audio/ogg">
   </audio>
   <audio id="sound-buy">
     <source src="audio/buy.ogg" type="audio/ogg">
   </audio>
+
+  <!-- Loading screen -->
   <table id="loadingScreen">
     <tr>
       <td>
@@ -26,6 +30,8 @@
       </td>
     </tr>
   </table>
+
+  <!-- Game -->
   <table id="maingame">
     <tr>
       <td id="mute" class="off"></td>
@@ -130,6 +136,8 @@
       <td><button class="info">?</button></td>
     </tr>
   </table>
+
+  <!-- More information screen -->
   <table id="information" class="hide">
     <tr>
       <td>
@@ -144,6 +152,8 @@
       </td>
     </tr>
   </table>
+
+  <!-- AFK summary screen -->
   <table id="summary" class="hide">
     <tr>
       <td>
@@ -154,6 +164,7 @@
       </td>
     </tr>
   </table>
+
   <script src="script.js"></script>
 </body>
 
