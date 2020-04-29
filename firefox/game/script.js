@@ -3,588 +3,857 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 // Variable setup
-var bike = {
-	ident:'bike',
-	running: false,
-	lastrun: 0,
-	time:500,
-	units:0,
-	dollar:20,
-	cost:200,
-	ceo:40000,
-	hasCEO:false
+let data = {
+    score: 200,
+    bike: {
+        id: 'bike',
+        running: false,
+        end: 0,
+        time: 500,
+        units: 0,
+        dollar: 20,
+        cost: 200,
+        ceo: {
+            cost: 40000,
+            has: false
+        }
+    },
+    taxi: {
+        id: 'taxi',
+        running: false,
+        end: 0,
+        time: 3000,
+        units: 0,
+        dollar: 300,
+        cost: 3600,
+        ceo: {
+            cost: 700000,
+            has: false
+        }
+    },
+    bus: {
+        id: 'bus',
+        running: false,
+        end: 0,
+        time: 6000,
+        units: 0,
+        dollar: 6200,
+        cost: 64800,
+        ceo: {
+            cost: 13000000,
+            has: false
+        }
+    },
+    tram: {
+        id: 'tram',
+        running: false,
+        end: 0,
+        time: 12000,
+        units: 0,
+        dollar: 21917500,
+        cost: 25300000,
+        ceo: {
+            cost: 230000000,
+            has: false
+        }
+    },
+    ferry: {
+        id: 'ferry',
+        running: false,
+        end: 0,
+        time: 24000,
+        units: 0,
+        dollar: 5800000,
+        cost: 20995200,
+        ceo: {
+            cost: 4200000000,
+            has: false
+        }
+    },
+    subway: {
+        id: 'subway',
+        running: false,
+        end: 0,
+        time: 48000,
+        units: 0,
+        dollar: 41570496,
+        cost: 377913600,
+        ceo: {
+            cost: 75000000000,
+            has: false
+        }
+    },
+    train: {
+        id: 'train',
+        running: false,
+        end: 0,
+        time: 96000,
+        units: 0,
+        dollar: 748268928,
+        cost: 6802444800,
+        ceo: {
+            cost: 1400000000000,
+            has: false
+        }
+    },
+    plane_rental: {
+        id: 'plane_rental',
+        running: false,
+        end: 0,
+        time: 192000,
+        units: 0,
+        dollar: 13468840704,
+        cost: 122444006400,
+        ceo: {
+            cost: 2000,
+            has: false
+        }
+    },
+    plane_small: {
+        id: 'plane_small',
+        running: false,
+        end: 0,
+        time: 384000,
+        units: 0,
+        dollar: 242439132672,
+        cost: 2203992115200,
+        ceo: {
+            cost: 24500000000000,
+            has: false
+        }
+    },
+    plane_medium: {
+        id: 'plane_medium',
+        running: false,
+        end: 0,
+        time: 768000,
+        units: 0,
+        dollar: 4363904388096,
+        cost: 39671858073600,
+        ceo: {
+            cost: 8000000000000000,
+            has: false
+        }
+    },
+    plane_large: {
+        id: 'plane_large',
+        running: false,
+        end: 0,
+        time: 1536000,
+        units: 0,
+        dollar: 78550278985728,
+        cost: 714093445324800,
+        ceo: {
+            cost: 140000000000000000,
+            has: false
+        }
+    },
+    ship_large: {
+        id: 'ship_large',
+        running: false,
+        end: 0,
+        time: 3072000,
+        units: 0,
+        dollar: 1413905021743104,
+        cost: 12853682015846400,
+        ceo: {
+            cost: 2600000000000000000,
+            has: false
+        }
+    }
 };
-var taxi = {
-	ident:'taxi',
-	running: false,
-	lastrun: 0,
-	time:3000,
-	units:0,
-	dollar:300,
-	cost:3600,
-	ceo:700000,
-	hasCEO:false
+
+let setting = {
+    mute: false
+}
+
+const UI = {
+    button: {
+        mute: document.getElementById('mute')
+    },
+    screen: {
+        information: {
+            window: document.getElementById('information'),
+            title: document.getElementById('info-title'),
+            owned: document.getElementById('info-owned'),
+            profit: document.getElementById('info-profit'),
+            length: document.getElementById('info-length'),
+            cost: document.getElementById('info-cost'),
+            salary: document.getElementById('info-salary'),
+            ceo: document.getElementById('info-ceo')
+        },
+        game: {
+            window: document.getElementById('maingame')
+        },
+        loading: {
+            window: document.getElementById('loadingScreen')
+        },
+        summary: {
+            window: document.getElementById('summary'),
+            amount: document.getElementById('summary-amount')
+        }
+    },
+    row: {
+        bike: document.getElementById('bike'),
+        taxi: document.getElementById('taxi'),
+        bus: document.getElementById('bus'),
+        tram: document.getElementById('tram'),
+        ferry: document.getElementById('ferry'),
+        subway: document.getElementById('subway'),
+        train: document.getElementById('train'),
+        plane_rental: document.getElementById('plane_rental'),
+        plane_small: document.getElementById('plane_small'),
+        plane_medium: document.getElementById('plane_medium'),
+        plane_large: document.getElementById('plane_large'),
+        ship_large: document.getElementById('ship_large')
+    },
+    text: {
+        score: document.getElementById('userScore')
+    }
 };
-var bus = {
-	ident:'bus',
-	running: false,
-	lastrun: 0,
-	time:6000,
-	units:0,
-	dollar:6200,
-	cost:64800,
-	ceo:13000000,
-	hasCEO:false
-};
-var tram = {
-	ident:'tram',
-	running: false,
-	lastrun: 0,
-	time:12000,
-	units:0,
-	dollar:21917500,
-	cost:25300000,
-	ceo:230000000,
-	hasCEO:false
-};
-var ferry = {
-	ident:'ferry',
-	running: false,
-	lastrun: 0,
-	time:24000,
-	units:0,
-	dollar:5800000,
-	cost:20995200,
-	ceo:4200000000,
-	hasCEO:false
-};
-var subway = {
-	ident:'subway',
-	running: false,
-	lastrun: 0,
-	time:48000,
-	units:0,
-	dollar:41570496,
-	cost:377913600,
-	ceo:75000000000,
-	hasCEO:false
-};
-var train = {
-	ident:'train',
-	running: false,
-	lastrun: 0,
-	time:96000,
-	units:0,
-	dollar:748268928,
-	cost:6802444800,
-	ceo:1400000000000,
-	hasCEO:false
-};
-var planerent = {
-	ident:'planerent',
-	running: false,
-	lastrun: 0,
-	time:192000,
-	units:0,
-	dollar:13468840704,
-	cost:122444006400,
-	ceo:2000.00,
-	hasCEO:false
-};
-var smplane = {
-	ident:'smplane',
-	running: false,
-	lastrun: 0,
-	time:384000,
-	units:0,
-	dollar:242439132672,
-	cost:2203992115200,
-	ceo:24500000000000,
-	hasCEO:false
-};
-var mdplane = {
-	ident:'mdplane',
-	running: false,
-	lastrun: 0,
-	time:768000,
-	units:0,
-	dollar:4363904388096,
-	cost:39671858073600,
-	ceo:8000000000000000,
-	hasCEO:false
-};
-var airliner = {
-	ident:'lgplane',
-	running: false,
-	lastrun: 0,
-	time:1536000,
-	units:0,
-	dollar:78550278985728,
-	cost:714093445324800,
-	ceo:140000000000000000,
-	hasCEO:false
-};
-var cruiseliner = {
-	ident:'lgship',
-	running: false,
-	lastrun: 0,
-	time:3072000,
-	units:0,
-	dollar:1413905021743104,
-	cost:12853682015846400,
-	ceo:2600000000000000000,
-	hasCEO:false
-};
-var score = 200;
-var mute = false;
 
 browser.alarms.onAlarm.addListener(cycleEnd);
-browser.storage.local.get('gamedata',loadGame);
-document.getElementById('mute').addEventListener('click',toggleMute);
+let loaded = browser.storage.local.get();
+loaded.then(loadGame);
+UI.button.mute.addEventListener('click', toggleMute);
 
-// Toggle audio muting
+/**
+ * Toggles game audio setting
+ */
 function toggleMute() {
-	var button = document.getElementById('mute');
-	if (mute) {
-		button.className = 'off';
-		mute = false;
-	} else {
-		button.className = 'on';
-		mute = true;
-	}
+    if (setting.mute) {
+        UI.button.mute.className = 'off';
+        setting.mute = false;
+    } else {
+        UI.button.mute.className = 'on';
+        setting.mute = true;
+    }
 }
 
-// Automatically save data
-window.onmouseout = function(){
-	browser.storage.local.set({
-		gamedata: {
-			bike_units: bike.units,
-			taxi_units: taxi.units,
-			bus_units: bus.units,
-			tram_units: tram.units,
-			ferry_units: ferry.units,
-			subway_units: subway.units,
-			train_units: train.units,
-			planerent_units: planerent.units,
-			smplane_units: smplane.units,
-			mdplane_units: mdplane.units,
-			airliner_units: airliner.units,
-			cruiseliner_units: cruiseliner.units,
-			bike_ceo: bike.hasCEO,
-			taxi_ceo: taxi.hasCEO,
-			bus_ceo: bus.hasCEO,
-			tram_ceo: tram.hasCEO,
-			ferry_ceo: ferry.hasCEO,
-			subway_ceo: subway.hasCEO,
-			train_ceo: train.hasCEO,
-			planerent_ceo: planerent.hasCEO,
-			smplane_ceo: smplane.hasCEO,
-			mdplane_ceo: mdplane.hasCEO,
-			airliner_ceo: airliner.hasCEO,
-			cruiseliner_ceo: cruiseliner.hasCEO,
-			bike_lastrun: bike.lastrun,
-			taxi_lastrun: taxi.lastrun,
-			bus_lastrun: bus.lastrun,
-			tram_lastrun: tram.lastrun,
-			ferry_lastrun: ferry.lastrun,
-			subway_lastrun: subway.lastrun,
-			train_lastrun: train.lastrun,
-			planerent_lastrun: planerent.lastrun,
-			smplane_lastrun: smplane.lastrun,
-			mdplane_lastrun: mdplane.lastrun,
-			airliner_lastrun: airliner.lastrun,
-			cruiseliner_lastrun: cruiseliner.lastrun,
-			score: score,
-			lastplayed: Date.now(),
-			mute: mute
-		}
-	})
-};
+/**
+ * Save game stats to browser storage
+ */
+function save() {
+    const write = {
+        storageVersion: 2,
+        settings: {
+            muted: setting.mute
+        },
+        data: {
+            score: data.score,
+            left: Date.now(),
+            vehicle: {
+                bike: {
+                    units: data.bike.units,
+                    ceo: data.bike.ceo.has,
+                    end: data.bike.end
+                },
+                taxi: {
+                    units: data.taxi.units,
+                    ceo: data.taxi.ceo.has,
+                    end: data.taxi.end
+                },
+                bus: {
+                    units: data.bus.units,
+                    ceo: data.bus.ceo.has,
+                    end: data.bus.end
+                },
+                tram: {
+                    units: data.tram.units,
+                    ceo: data.tram.ceo.has,
+                    end: data.tram.end
+                },
+                ferry: {
+                    units: data.ferry.units,
+                    ceo: data.ferry.ceo.has,
+                    end: data.ferry.end
+                },
+                subway: {
+                    units: data.subway.units,
+                    ceo: data.subway.ceo.has,
+                    end: data.subway.end
+                },
+                train: {
+                    units: data.train.units,
+                    ceo: data.train.ceo.has,
+                    end: data.train.end
+                },
+                plane_rental: {
+                    units: data.plane_rental.units,
+                    ceo: data.plane_rental.ceo.has,
+                    end: data.plane_rental.end
+                },
+                plane_small: {
+                    units: data.plane_small.units,
+                    ceo: data.plane_small.ceo.has,
+                    end: data.plane_small.end
+                },
+                plane_medium: {
+                    units: data.plane_medium.units,
+                    ceo: data.plane_medium.ceo.has,
+                    end: data.plane_medium.end
+                },
+                plane_large: {
+                    units: data.plane_large.units,
+                    ceo: data.plane_large.ceo.has,
+                    end: data.plane_large.end
+                },
+                ship_large: {
+                    units: data.ship_large.units,
+                    ceo: data.ship_large.ceo.has,
+                    end: data.ship_large.end
+                }
+            }
+        }
+    };
 
-// Handles button clicks
+    browser.storage.local.set(write);
+}
+
+/**
+ * Handle button clicks
+ * @param {EventTarget} el 
+ */
 function handleButtons(el) {
-	var type = el.target.name;
-	var command = el.target.className;
-	if (command == 'runButton') {
-		if (!mute) {
-			document.getElementById('buttonsound').play();
-		}
-		cycle(type);
-	} else if (command == 'upgradeButton') {
-		upgrade(type);
-	} else if (command == 'hire') {
-		hireCEO(type);
-	} else if (command == 'showInformation') {
-		if (!mute) {
-			document.getElementById('buttonsound').play();
-		}
-		showInfo(type);
-		toggleInfo(true);
-	} else if (command == 'closeInformation') {
-		if (!mute) {
-			document.getElementById('buttonsound').play();
-		}
-		toggleInfo(false);
-	} else if (command == 'closeSummary') {
-		if (!mute) {
-			document.getElementById('buttonsound').play();
-		}
-		toggleSummary(false);
-	}
+    const type = el.target.parentNode.parentNode.id;
+    switch (el.target.className) {
+
+        case 'work':
+            playSound('button');
+            cycle(type);
+            break;
+
+        case 'buy':
+            buy(type);
+            break;
+
+        case 'hire':
+            hire(type);
+            break;
+
+        case 'info':
+            playSound('button');
+            showInfo(type);
+            toggleInfo(true);
+            break;
+
+        case 'closeInformation':
+            playSound('button');
+            toggleInfo(false);
+            break;
+
+        case 'closeSummary':
+            playSound('button');
+            toggleSummary(false);
+            break;
+    }
+
+    save();
 }
 
-// Generates information screen
+/**
+ * Play sound
+ * @param {string} sound 
+ */
+function playSound(sound) {
+    if (!setting.mute) {
+        const audio = document.getElementById('sound-' + sound);
+        audio.currentTime = 0;
+        audio.play();
+    }
+}
+
+/**
+ * Create information screen
+ * @param {string} type 
+ */
 function showInfo(type) {
-	var item = getUnitType(type);
-	var info = document.getElementsByName('info');
-	info[0].textContent = document.getElementsByName(item.ident)[1].textContent;
-	info[1].textContent = item.units;
-	info[2].textContent = minifyNumber(item.dollar);
-	if (item.time > 59000) {
-		var displayMinutes = 0;
-		var displaySeconds = item.time/1000;
-		do {
-			displaySeconds -= 60;
-			displayMinutes += 1;
-		} while (displaySeconds > 59);
-		info[3].textContent = displayMinutes + 'm ' + displaySeconds + 's';
-	} else {
-		info[3].textContent = (item.time/1000) + 's';
-	}
-	info[4].textContent = minifyNumber(item.cost);
-	info[5].textContent = minifyNumber(item.ceo);
-	if (item.hasCEO) {
-		info[6].textContent = 'Yes';
-	} else {
-		info[6].textContent = 'No';
-	}
+    const vehicle = data[type];
+
+    UI.screen.information.title.textContent = UI.row[vehicle.id].getElementsByClassName('bar')[0].textContent;
+    UI.screen.information.owned.textContent = vehicle.units;
+    UI.screen.information.profit.textContent = minifyNumber(vehicle.dollar);
+
+    if (vehicle.time > 59000) {
+        let displayMinutes = 0;
+        let displaySeconds = vehicle.time / 1000;
+
+        do {
+            displaySeconds -= 60;
+            displayMinutes += 1;
+        } while (displaySeconds > 59);
+
+        UI.screen.information.length.textContent = displayMinutes + 'm ' + displaySeconds + 's';
+    } else {
+        UI.screen.information.length.textContent = (vehicle.time / 1000) + 's';
+    }
+
+    UI.screen.information.cost.textContent = minifyNumber(vehicle.cost);
+    UI.screen.information.salary.textContent = minifyNumber(vehicle.ceo.cost);
+
+    if (vehicle.ceo.has) {
+        UI.screen.information.ceo.textContent = 'Yes';
+    } else {
+        UI.screen.information.ceo.textContent = 'No';
+    }
 }
 
-// Toggles information screen
+/**
+ * Shows/hides the information screen
+ * @param {boolean} show 
+ */
 function toggleInfo(show) {
-	if (show) {
-		document.getElementById('maingame').className = 'hideScreen';
-		document.getElementById('information').className = 'showScreen';
-	} else {
-		document.getElementById('information').className = 'hideScreen';
-		document.getElementById('maingame').className = 'showScreen';
-	}
+    if (show) {
+        UI.screen.information.window.classList.remove('hide');
+    } else {
+        UI.screen.information.window.classList.add('hide');
+    }
 }
 
-// Toggles away summary
+/**
+ * Show/hide the game boot summary
+ * @param {boolean} show 
+ */
 function toggleSummary(show) {
-	if (document.getElementById('loadingScreen')) {
-		document.getElementById('loadingScreen').parentElement.removeChild(document.getElementById('loadingScreen'));
-	}
-	if (show) {
-		document.getElementById('maingame').className = 'hideScreen';
-		document.getElementById('summary').className = 'showScreen';
-	} else {
-		document.getElementById('summary').className = 'hideScreen';
-		document.getElementById('maingame').className = 'showScreen';
-	}
+    UI.screen.loading.window.classList.add('hide');
+
+    if (show) {
+        UI.screen.summary.window.classList.remove('hide');
+    } else {
+        UI.screen.summary.window.classList.add('hide');
+    }
 }
 
-// Link data to variable
-function getUnitType(type) {
-	if (type == 'bike') {
-		var item = bike;
-	} else if (type == 'taxi') {
-		var item = taxi;
-	} else if (type == 'bus') {
-		var item = bus;
-	} else if (type == 'tram') {
-		var item = tram;
-	} else if (type == 'ferry') {
-		var item = ferry;
-	} else if (type == 'subway') {
-		var item = subway;
-	} else if (type == 'train') {
-		var item = train;
-	} else if (type == 'planerent') {
-		var item = planerent;
-	} else if (type == 'smplane') {
-		var item = smplane;
-	} else if (type == 'mdplane') {
-		var item = mdplane;
-	} else if (type == 'lgplane') {
-		var item = airliner;
-	} else if (type == 'lgship') {
-		var item = cruiseliner;
-	}
-	return item;
-}
-
-// Update the score
+/**
+ * Update the score
+ */
 function updateScore() {
-	if (score > 999999999) {
-		document.getElementById('userScore').textContent = minifyNumber(score);
-	} else {
-		document.getElementById('userScore').textContent = score.toFixed(2);
-	}
-	statusCheck();
+    if (data.score > 999999999) {
+        UI.text.score.textContent = minifyNumber(data.score);
+    } else {
+        UI.text.score.textContent = data.score.toFixed(2);
+    }
+
+    statusCheck();
 }
 
-// Hire a CEO
-function hireCEO(type) {
-	var item = getUnitType(type);
-	if (score >= item.ceo) {
-		if (!mute) {
-			document.getElementById('buysound').play();
-		}
-		score -= item.ceo;
-		item.hasCEO = true;
-		updateScore();
-		cycle(type);
-	} else {
-		showError();
-	}
+/**
+ * Hire a CEO
+ * @param {string} type 
+ */
+function hire(type) {
+    const vehicle = data[type];
+
+    if (data.score >= vehicle.ceo.cost) {
+        data.score -= vehicle.ceo.cost;
+        vehicle.ceo.has = true;
+        playSound('buy');
+        updateScore();
+        cycle(type);
+    } else {
+        showError();
+    }
 }
 
-// Run a work cycle
+/**
+ * Start a work cycle
+ * @param {string} type 
+ */
 function cycle(type) {
-	var item = getUnitType(type);
-	item.running = true;
-	var progressBar = document.getElementsByName(item.ident)[1];
-	var button = document.getElementsByName(item.ident)[2];
-	button.disabled = true;
-	progressBar.className = 'progressBar done';
-	var d = Date.now();
-	d += item.time;
-	item.lastrun = d;
-	browser.alarms.create(item.ident,{when:d});
+    const vehicle = data[type];
+    const progressBar = UI.row[vehicle.id].getElementsByClassName('bar')[0];
+    const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
+    let currentTime = Date.now();
+
+    vehicle.running = true;
+    currentTime += vehicle.time;
+    vehicle.end = currentTime;
+
+    button.disabled = true;
+    startAnimation(progressBar);
+
+    browser.alarms.create(vehicle.id, {
+        when: currentTime
+    });
+
+    save();
 }
 
-// End of work cycle
+/**
+ * End a work cycle
+ * @param {Object} alarmInfo 
+ */
 function cycleEnd(alarmInfo) {
-	var item = getUnitType(alarmInfo.name);
-	var progressBar = document.getElementsByName(item.ident)[1];
-	var button = document.getElementsByName(item.ident)[2];
-	score += (item.dollar * item.units);
-	item.running = false;
-	updateScore();
-	button.disabled = false;
-	progressBar.className = 'progressBar';
-	if (item.hasCEO) {
-		button.disabled = true;
-		setTimeout(function(){
-			cycle(item.ident)
-		},100);
-	}
+    const vehicle = data[alarmInfo.name];
+    const button = UI.row[vehicle.id].getElementsByClassName('work')[0];
+
+    vehicle.running = false;
+    vehicle.end = 0;
+    data.score += (vehicle.dollar * vehicle.units);
+    updateScore();
+
+    button.disabled = false;
+
+    if (vehicle.ceo.has) {
+        button.disabled = true;
+
+        setTimeout(() => {
+            cycle(vehicle.id)
+        }, 100);
+    }
+
+    save();
 }
 
-// Purchase a unit
-function upgrade(type) {
-	var item = getUnitType(type);
-	if (score >= item.cost) {
-		if (!mute) {
-			document.getElementById('buysound').play();
-		}
-		item.units++;
-		document.getElementsByName(type)[0].textContent = item.units;
-		score -= item.cost;
-		item.cost = (item.cost * 1.05).toFixed(2);
-		updateScore();
-	} else {
-		showError();
-	}
+/**
+ * Purchase a vehicle
+ * @param {string} type 
+ */
+function buy(type) {
+    const vehicle = data[type];
+
+    if (data.score >= vehicle.cost) {
+        data.score -= vehicle.cost;
+        vehicle.units++;
+        vehicle.cost = (vehicle.cost * 1.05).toFixed(2);
+
+        UI.row[vehicle.id].getElementsByClassName('count')[0].textContent = vehicle.units;
+
+        playSound('buy');
+        updateScore();
+    } else {
+        showError();
+    }
 }
 
-// Setup game
+/**
+ * Load game
+ * @param {Object} saved 
+ */
 function loadGame(saved) {
-	if (saved.gamedata) {
-		// Load saved unit data
-		bike.units = saved.gamedata.bike_units;
-		taxi.units = saved.gamedata.taxi_units;
-		bus.units = saved.gamedata.bus_units;
-		tram.units = saved.gamedata.tram_units;
-		ferry.units = saved.gamedata.ferry_units;
-		subway.units = saved.gamedata.subway_units;
-		train.units = saved.gamedata.train_units;
-		planerent.units = saved.gamedata.planerent_units;
-		smplane.units = saved.gamedata.smplane_units;
-		mdplane.units = saved.gamedata.mdplane_units;
-		airliner.units = saved.gamedata.airliner_units;
-		cruiseliner.units = saved.gamedata.cruiseliner_units;
-		
-		// Load saved CEO data
-		bike.hasCEO = saved.gamedata.bike_ceo;
-		taxi.hasCEO = saved.gamedata.taxi_ceo;
-		bus.hasCEO = saved.gamedata.bus_ceo;
-		tram.hasCEO = saved.gamedata.tram_ceo;
-		ferry.hasCEO = saved.gamedata.ferry_ceo;
-		subway.hasCEO = saved.gamedata.subway_ceo;
-		train.hasCEO = saved.gamedata.train_ceo;
-		planerent.hasCEO = saved.gamedata.planerent_ceo;
-		smplane.hasCEO = saved.gamedata.smplane_ceo;
-		mdplane.hasCEO = saved.gamedata.mdplane_ceo;
-		airliner.hasCEO = saved.gamedata.airliner_ceo;
-		cruiseliner.hasCEO = saved.gamedata.cruiseliner_ceo;
-		
-		// Load last runs
-		bike.lastrun = saved.gamedata.bike_lastrun;
-		taxi.lastrun = saved.gamedata.taxi_lastrun;
-		bus.lastrun = saved.gamedata.bus_lastrun;
-		tram.lastrun = saved.gamedata.tram_lastrun;
-		ferry.lastrun = saved.gamedata.ferry_lastrun;
-		subway.lastrun = saved.gamedata.subway_lastrun;
-		train.lastrun = saved.gamedata.train_lastrun;
-		planerent.lastrun = saved.gamedata.planerent_lastrun;
-		smplane.lastrun = saved.gamedata.smplane_lastrun;
-		mdplane.lastrun = saved.gamedata.mdplane_lastrun;
-		airliner.lastrun = saved.gamedata.airliner_lastrun;
-		cruiseliner.lastrun = saved.gamedata.cruiseliner_lastrun;
-		
-		// Load other data
-		score = saved.gamedata.score;
-		mute = saved.gamedata.mute;
-		var dateLeft = saved.gamedata.lastplayed;
-	} else {
-		browser.storage.local.set({
-			gamedata: {
-				bike_units: 0,
-				taxi_units: 0,
-				bus_units: 0,
-				tram_units: 0,
-				ferry_units: 0,
-				subway_units: 0,
-				train_units: 0,
-				planerent_units: 0,
-				smplane_units: 0,
-				mdplane_units: 0,
-				airliner_units: 0,
-				cruiseliner_units: 0,
-				bike_ceo: false,
-				taxi_ceo: false,
-				bus_ceo: false,
-				tram_ceo: false,
-				ferry_ceo: false,
-				subway_ceo: false,
-				train_ceo: false,
-				planerent_ceo: false,
-				smplane_ceo: false,
-				mdplane_ceo: false,
-				airliner_ceo: false,
-				cruiseliner_ceo: false,
-				score: 200,
-				lastplayed: 1
-			}
-		});
-	}
-	
-	// Load mute status
-	var muteToggle = document.getElementById('mute');
-	if (mute) {
-		muteToggle.className = 'on';
-	} else {
-		muteToggle.className = 'off';
-	}
-	
-	// Gather tycoon objects
-	var type = [bike,taxi,bus,tram,ferry,subway,train,planerent,smplane,mdplane,airliner,cruiseliner];
-	
-	// Calculate income while away
-	var dateNow = Date.now();
-	var dateDiff = dateNow - dateLeft;
-	var scoreBefore = score;
-	for (i = 0; i < type.length; i++) {
-		if (type[i].hasCEO) {
-			score += Math.round(dateDiff / (type[i].time + 100)) * type[i].dollar * type[i].units;
-		} else {
-			if (type[i].lastrun && type[i].lastrun != 0) {
-				if ((dateNow - type[i].lastrun) >= type[i].time) {
-					score += type[i].dollar;
-				} else if (((dateNow - type[i].lastrun) < type[i].time) && ((dateNow - type[i].lastrun) > -type[i].time)) {
-					type[i].running = true;
-					var progressBar = document.getElementsByName(type[i].ident)[1];
-					var button = document.getElementsByName(type[i].ident)[2];
-					button.disabled = true;
-					progressBar.className = 'progressBar done';
-					browser.alarms.create(type[i].ident,{when:type[i].lastrun});
-				} else {
-					
-				}
-			}
-		}
-	}
-	var scoreAfter = score;
-	var scoreDiff = scoreAfter - scoreBefore;
-	
-	// Setup unit counters and start work
-	for (i = 0; i < type.length; i++) {
-		document.getElementsByName(type[i].ident)[0].textContent = type[i].units;
-		if (type[i].hasCEO) {
-			cycle(type[i].ident);
-		}
-	}
-	
-	// Setup current prices
-	for (i = 0; i < type.length; i++) {
-		for (ii = 0; ii < type[i].units; ii++) {
-			type[i].cost = (type[i].cost * 1.05).toFixed(2);
-		}
-	}
-	
-	// Display the summary screen (if applicable)
-	if (dateDiff > 1800000 && !(dateLeft == 1) && scoreDiff > 0) {
-		document.getElementById('summaryAmount').textContent = '$' + scoreDiff.toFixed(2);
-		toggleSummary(true);
-	} else {	
-		toggleSummary(false);
-	}
-	updateScore();
-	document.getElementsByTagName('body')[0].addEventListener('click',handleButtons);
+    let dateLeft;
+
+    if (saved.data) {
+        // Load saved unit data
+        data.bike.units = saved.data.vehicle.bike.units;
+        data.taxi.units = saved.data.vehicle.taxi.units;
+        data.bus.units = saved.data.vehicle.bus.units;
+        data.tram.units = saved.data.vehicle.tram.units;
+        data.ferry.units = saved.data.vehicle.ferry.units;
+        data.subway.units = saved.data.vehicle.subway.units;
+        data.train.units = saved.data.vehicle.train.units;
+        data.plane_rental.units = saved.data.vehicle.plane_rental.units;
+        data.plane_small.units = saved.data.vehicle.plane_small.units;
+        data.plane_medium.units = saved.data.vehicle.plane_medium.units;
+        data.plane_large.units = saved.data.vehicle.plane_large.units;
+        data.ship_large.units = saved.data.vehicle.ship_large.units;
+
+        // Load saved CEO data
+        data.bike.ceo.has = saved.data.vehicle.bike.ceo;
+        data.taxi.ceo.has = saved.data.vehicle.taxi.ceo;
+        data.bus.ceo.has = saved.data.vehicle.bus.ceo;
+        data.tram.ceo.has = saved.data.vehicle.tram.ceo;
+        data.ferry.ceo.has = saved.data.vehicle.ferry.ceo;
+        data.subway.ceo.has = saved.data.vehicle.subway.ceo;
+        data.train.ceo.has = saved.data.vehicle.train.ceo;
+        data.plane_rental.ceo.has = saved.data.vehicle.plane_rental.ceo;
+        data.plane_small.ceo.has = saved.data.vehicle.plane_small.ceo;
+        data.plane_medium.ceo.has = saved.data.vehicle.plane_medium.ceo;
+        data.plane_large.ceo.has = saved.data.vehicle.plane_large.ceo;
+        data.ship_large.ceo.has = saved.data.vehicle.ship_large.ceo;
+
+        // Load last runs
+        data.bike.end = saved.data.vehicle.bike.end;
+        data.taxi.end = saved.data.vehicle.taxi.end;
+        data.bus.end = saved.data.vehicle.bus.end;
+        data.tram.end = saved.data.vehicle.tram.end;
+        data.ferry.end = saved.data.vehicle.ferry.end;
+        data.subway.end = saved.data.vehicle.subway.end;
+        data.train.end = saved.data.vehicle.train.end;
+        data.plane_rental.end = saved.data.vehicle.plane_rental.end;
+        data.plane_small.end = saved.data.vehicle.plane_small.end;
+        data.plane_medium.end = saved.data.vehicle.plane_medium.end;
+        data.plane_large.end = saved.data.vehicle.plane_large.end;
+        data.ship_large.end = saved.data.vehicle.ship_large.end;
+
+        // Load other data
+        data.score = saved.data.score;
+        setting.mute = saved.settings.muted;
+        dateLeft = saved.data.lastplayed;
+    } else {
+        const write = {
+            storageVersion: 2,
+            settings: {
+                muted: false
+            },
+            data: {
+                score: 200,
+                left: 1,
+                vehicle: {
+                    bike: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    taxi: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    bus: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    tram: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    ferry: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    subway: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    train: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_rental: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_small: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_medium: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    plane_large: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    },
+                    ship_large: {
+                        units: 0,
+                        ceo: false,
+                        end: 0
+                    }
+                }
+            }
+        };
+
+        browser.storage.local.set(write);
+    }
+
+    // Load mute status
+    if (setting.mute) {
+        UI.button.mute.className = 'on';
+    } else {
+        UI.button.mute.className = 'off';
+    }
+
+    // Gather tycoon objects
+    const vehicle = [
+        data.bike,
+        data.taxi,
+        data.bus,
+        data.tram,
+        data.ferry,
+        data.subway,
+        data.train,
+        data.plane_rental,
+        data.plane_small,
+        data.plane_medium,
+        data.plane_large,
+        data.ship_large
+    ];
+
+    // Calculate income while away
+    const dateDiff = Date.now() - dateLeft;
+    const scoreBefore = data.score;
+
+    for (let i = 0; i < vehicle.length; i++) {
+
+        let dateNow = Date.now();
+        // Add money earned by automatic processes while away (if there's a CEO)
+        if (vehicle[i].ceo.has) {
+            if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
+                data.score += Math.floor(dateDiff / vehicle[i].time) * vehicle[i].dollar * vehicle[i].units;
+                const completed = dateDiff % vehicle[i].time;
+                const nextTime = dateNow + vehicle[i].time - completed
+                vehicle[i].end = nextTime;
+            }
+        }
+
+        if (vehicle[i].end && vehicle[i].end != 0) {
+            // Handle if the vehicle has been run at all
+
+            if ((dateNow - vehicle[i].end) >= vehicle[i].time) {
+                // Add completed time if a vehicle run was completed while game was closed
+                data.score += vehicle[i].dollar;
+            } else if (((dateNow - vehicle[i].end) < vehicle[i].time) && ((dateNow - vehicle[i].end) > -vehicle[i].time)) {
+                // Resume the work cycle if the vehicle cycle is still in progress
+                const progressBar = UI.row[vehicle[i].id].getElementsByClassName('bar')[0];
+                const button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
+
+                vehicle[i].running = true;
+
+                button.disabled = true;
+                const animationDelay = (vehicle[i].end - dateNow - vehicle[i].time) / 1000;
+                startDelayedAnimation(progressBar, animationDelay);
+
+                browser.alarms.create(vehicle[i].id, {
+                    when: vehicle[i].end
+                });
+            }
+        }
+    }
+
+    // Calculate difference in score
+    const scoreDiff = data.score - scoreBefore;
+
+    // Setup unit counters and start work
+    for (let i = 0; i < vehicle.length; i++) {
+        UI.row[vehicle[i].id].getElementsByClassName('count')[0].textContent = vehicle[i].units;
+    }
+
+    // Setup current prices
+    for (let i = 0; i < vehicle.length; i++) {
+        for (let ii = 0; ii < vehicle[i].units; ii++) {
+            vehicle[i].cost = (vehicle[i].cost * 1.05).toFixed(2);
+        }
+    }
+
+    // Display the summary screen (if applicable)
+    if (dateDiff > 1800000 && !(dateLeft == 1) && scoreDiff > 0) {
+        UI.screen.summary.amount.textContent = '$' + scoreDiff.toFixed(2);
+        toggleSummary(true);
+    } else {
+        toggleSummary(false);
+    }
+
+    updateScore();
+    document.body.addEventListener('click', handleButtons);
 }
 
-// Handle large numbers
+/**
+ * Convert large numbers into money text
+ * @param {number} num
+ * @returns {number} Formatted number
+ */
 function minifyNumber(num) {
-	num = parseFloat(num);
-	if (num >= 1000000000000000000000000000000) {
-		num = (num / 1000000000000000000000000000000).toFixed(3) + 'N';
-	} else if (num >= 1000000000000000000000000000) {
-		num = (num / 1000000000000000000000000000).toFixed(3) + 'o';
-	} else if (num >= 1000000000000000000000000) {
-		num = (num / 1000000000000000000000000).toFixed(3) + 'S';
-	} else if (num >= 1000000000000000000000) {
-		num = (num / 1000000000000000000000).toFixed(3) + 's';
-	} else if (num >= 1000000000000000000) {
-		num = (num / 1000000000000000000).toFixed(3) + 'Q';
-	} else if (num >= 1000000000000000) {
-		num = (num / 1000000000000000).toFixed(3) + 'q';
-	} else if (num >= 1000000000000) {
-		num = (num / 1000000000000).toFixed(3) + 'T';
-	} else if (num >= 1000000000) {
-		num = (num / 1000000000).toFixed(3) + 'B';
-	} else if (num >= 1000000) {
-		num = (num / 1000000).toFixed(3) + 'M';
-	} else {
-		num = num.toFixed(2);
-	}
-	return num;
+    num = parseFloat(num);
+
+    if (num >= 1000000000000000000000000000000) {
+        num = (num / 1000000000000000000000000000000).toFixed(3) + 'N';
+    } else if (num >= 1000000000000000000000000000) {
+        num = (num / 1000000000000000000000000000).toFixed(3) + 'o';
+    } else if (num >= 1000000000000000000000000) {
+        num = (num / 1000000000000000000000000).toFixed(3) + 'S';
+    } else if (num >= 1000000000000000000000) {
+        num = (num / 1000000000000000000000).toFixed(3) + 's';
+    } else if (num >= 1000000000000000000) {
+        num = (num / 1000000000000000000).toFixed(3) + 'Q';
+    } else if (num >= 1000000000000000) {
+        num = (num / 1000000000000000).toFixed(3) + 'q';
+    } else if (num >= 1000000000000) {
+        num = (num / 1000000000000).toFixed(3) + 'T';
+    } else if (num >= 1000000000) {
+        num = (num / 1000000000).toFixed(3) + 'B';
+    } else if (num >= 1000000) {
+        num = (num / 1000000).toFixed(3) + 'M';
+    } else {
+        num = num.toFixed(2);
+    }
+
+    return num;
 }
 
-// Setup button status
+/**
+ * Enable/Disable buttons (as required)
+ */
 function statusCheck() {
-	var type = [bike,taxi,bus,tram,ferry,subway,train,planerent,smplane,mdplane,airliner,cruiseliner];
-	for (i = 0; i < type.length; i++) {
-		if (score >= type[i].cost) {
-			document.getElementsByName(type[i].ident)[3].disabled = false;
-		} else {
-			document.getElementsByName(type[i].ident)[3].disabled = true;
-		}
-		if (score >= type[i].ceo) {
-			document.getElementsByName(type[i].ident)[4].disabled = false;
-		} else {
-			document.getElementsByName(type[i].ident)[4].disabled = true;
-		}
-		if (type[i].units > 0 && !(type[i].hasCEO)) {
-			document.getElementsByName(type[i].ident)[2].disabled = false;
-		} else {
-			document.getElementsByName(type[i].ident)[2].disabled = true;
-			document.getElementsByName(type[i].ident)[4].disabled = true;
-		}
-		if (type[i].running) {
-			document.getElementsByName(type[i].ident)[2].disabled = true;
-		}
-	}
+    const vehicle = [
+        data.bike,
+        data.taxi,
+        data.bus,
+        data.tram,
+        data.ferry,
+        data.subway,
+        data.train,
+        data.plane_rental,
+        data.plane_small,
+        data.plane_medium,
+        data.plane_large,
+        data.ship_large
+    ];
+
+    for (let i = 0; i < vehicle.length; i++) {
+        let button;
+        // Check if player can afford to purchase vehicle
+        button = UI.row[vehicle[i].id].getElementsByClassName('buy')[0];
+        if (data.score >= vehicle[i].cost) {
+            button.disabled = false;
+        } else {
+            button.disabled = true;
+        }
+
+        // Check if player can afford a CEO
+        button = UI.row[vehicle[i].id].getElementsByClassName('hire')[0];
+        if (data.score >= vehicle[i].ceo.cost) {
+            button.disabled = false;
+        } else {
+            button.disabled = true;
+        }
+
+        // Check that player doesn't have a CEO already
+        // and that they own at least 1 vehicle
+        button = UI.row[vehicle[i].id].getElementsByClassName('work')[0];
+        if (vehicle[i].units > 0 && !(vehicle[i].ceo.has)) {
+            button.disabled = false;
+        } else {
+            button.disabled = true;
+            UI.row[vehicle[i].id].getElementsByClassName('hire')[0].disabled = true;
+        }
+
+        // Check if vehicle cycle is running
+        if (vehicle[i].running) {
+            button.disabled = true;
+        }
+    }
+}
+
+/**
+ * Start progress bar animation from the start
+ * @param {HTMLElement} bar 
+ */
+function startAnimation(bar) {
+    bar.classList.remove('play');
+    bar.removeAttribute('style');
+    void bar.offsetWidth;
+    bar.classList.add('play');
+}
+
+/**
+ * Start progress bar animation with a delay
+ * @param {HTMLElement} bar
+ * @param {number} delay
+ */
+function startDelayedAnimation(bar, delay) {
+    bar.classList.remove('play');
+    bar.setAttribute('style', 'animation-delay: ' + delay + 's;');
+    void bar.offsetWidth;
+    bar.classList.add('play');
 }

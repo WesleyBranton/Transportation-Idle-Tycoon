@@ -2,26 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-fieldset {
-	border: 2px solid #0996f8;
-	border-radius: 5px;
-}
-
-legend {
-	background-color: #0996f8;
-	color: white;
-	border-radius: 3px;
-}
-
-#warning {
-	color: red;
-}
-
-#retire {
-	float:right;
-}
-
-#congrats {
-	color: green;
-	display: none;
+body.not-retired section.is-retired,
+body.is-retired section.not-retired {
+  display: none !important;
 }

@@ -4,20 +4,28 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"/>
-		<link rel="stylesheet" href="theme.css"/>
-	</head>
-	<body>
-		<form>
-			<fieldset>
-				<legend>Retirement</legend>
-				Feel like you've conquered all that there is to conquer in the transportation industry? Perhaps it's time to clean out your office and give up your busy business lifestyle for a room at the Foxville Retirement Home.<br><br>
-				<button id="retire" type="button">Retire</button><br><br>
-				<span id="warning"><b>WARNING:</b> Retiring will erase all of your user data. This cannot be undone!</span><br><br>
-				<span id="congrats">Congratulations on your retirement! Now it's time to sit back and relax... unless you feel like dominating the transportation industry again.</span>
-			</fieldset>
-		</form>
-		<script src="options.js"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="../lib/new_browser_style.css" />
+</head>
+
+<body class="browser-style not-retired">
+  <section class="panel-section">
+    <p>Feel like you've conquered all that there is to conquer in the transportation industry? Perhaps it's time to clean out your office and give up your busy business lifestyle for a room at the <i>Foxville Retirement Home.</i></p>
+  </section>
+  <section class="panel-section not-retired">
+    <label>Click the button if you would like to retire</label>
+    <button id="retire" class="default" type="button">Retire</button>
+  </section>
+  <section class="panel-section not-retired">
+    <div class="message-bar warning">Retiring will erase all of your user data. This cannot be undone!</div>
+  </section>
+  <section class="panel-section is-retired">
+    <div class="message-bar success">Congratulations on your retirement! Restart your career at any time by opening the game popup.</div>
+  </section>
+  <script src="options.js"></script>
+</body>
+
 </html>

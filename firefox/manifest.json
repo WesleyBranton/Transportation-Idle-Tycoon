@@ -1,25 +1,30 @@
 {
-	"manifest_version": 2,
-	"name": "Transportation Idle Tycoon",
-	"version": "1.0",
-	"description": "Become the king or queen of the transportation industry by expanding your transit empire!",
+    "manifest_version": 2,
+    "name": "Transportation Idle Tycoon",
+    "version": "1.0",
+    "description": "Become the king or queen of the transportation industry by expanding your transit empire!",
 
-	"icons": {
-		"48": "icons/icon-48.png",
-		"96": "icons/icon-96.png"
-	},
+    "icons": {
+        "48": "icons/icon-48.png",
+        "96": "icons/icon-96.png"
+    },
 
-	"browser_action": {
-		"default_icon": "icons/icon-32.png",
-		"default_title": "Transportation Idle Tycoon",
-		"default_popup": "game/game.html",
-		"width": "563px",
-		"height": "440px"
-	},
-	
-	"options_ui": {
-		"page": "options/options.html"
-	},
+    "background": {
+        "scripts": ["background.js"]
+    },
 
-	"permissions": ["storage","alarms"]
+    "browser_action": {
+        "default_icon": "icons/icon-32.png",
+        "default_title": "Transportation Idle Tycoon",
+        "default_popup": "game/game.html"
+    },
+
+    "options_ui": {
+        "page": "options/options.html"
+    },
+
+    "permissions": [
+		"storage",
+		"alarms"
+	]
 }

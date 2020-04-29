@@ -2,180 +2,205 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-.progressBar.done:after {
-	content:"...";
-}
-
 * {
-	cursor: default;
-}
-
-#loadingScreen {
-	width:100%;
-	text-align:center;
-}
-
-td[colspan] {
-	text-align: right;
-}
-
-#loadingScreen tr td h1:after {
-	animation: loading 1s linear infinite;
-}
-
-@keyframes loading {
-	0% {content:"   "}
-	25% {content: ".  "}
-	50% {content: ".. "}
-	75% {content: "..."}
-	100% {content: "   "}
+  cursor: default;
 }
 
 body {
-	font-size: 22px;
-	font-family: sans-serif;
-	min-height: 500px;
-	min-width: 600px;
+  font-size: 16pt;
+  font-family: sans-serif;
 }
 
-.showScreen {
-	display:table;
+.hide {
+  position: fixed;
+  top: -100000000px !important;
 }
 
-.hideScreen {
-	display:none;
+#loadingScreen {
+  text-align: center;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 255;
 }
 
-#information, #summary {
-	text-align: center;
-	margin: auto;
+#loadingScreen .spinner {
+  border: 10px solid transparent;
+  border-radius: 50%;
+  border-top: 10px solid #ff6600;
+  width: 50px;
+  height: 50px;
+  animation: spin .5s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+td[colspan] {
+  text-align: right;
+}
+
+#information,
+#summary {
+  text-align: center;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 254;
 }
 
 #maingame {
-	margin:auto;
+  z-index: 100;
 }
 
-.counter {
-	width:22px;
-	text-align:center;
-	background-color:black;
-	color:white;
-	border-radius: 100px;
+.count {
+  text-align: center;
+  background-color: black;
+  color: white;
+  border-radius: 100px;
+  min-width: 48pt;
 }
 
 #mute {
-	cursor: pointer;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #mute.on {
-	background-image: url("images/mute-on.jpg");
+  background-image: url("images/mute-on.jpg");
 }
 
 #mute.off {
-	background-image: url("images/mute-off.jpg");
+  background-image: url("images/mute-off.jpg");
 }
 
 button {
-	font-size: 16pt;
-	border-radius:3px;
-	border:none;
-	color:white;
-	cursor: pointer;
+  font-size: 16pt;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
 
-button.runButton {
-	background-color:#309c4d;
-	border-bottom: 3px solid #24753a;
+button.work {
+  background-color: #309c4d;
+  border-bottom: 3px solid #24753a;
 }
 
-button.upgradeButton {
-	background-color: #3366ff;
-	border-bottom: 3px solid #0040ff;
+button.buy {
+  background-color: #3366ff;
+  border-bottom: 3px solid #0040ff;
 }
 
-button.hire, button.fire, button.closeInformation, button.closeSummary {
-	background-color: #ff3300;
-	border-bottom: 3px solid #cc2900;
+button.hire,
+button.fire,
+button.closeInformation,
+button.closeSummary {
+  background-color: #ff3300;
+  border-bottom: 3px solid #cc2900;
 }
 
-button.showInformation {
-	background-color: #9933ff;
-	border-bottom: 3px solid #8000ff;
-	cursor: help;
+button.info {
+  background-color: #9933ff;
+  border-bottom: 3px solid #8000ff;
+  cursor: help;
 }
 
 button:disabled {
-	background-color:#d9d9d9;
-	border-bottom: 3px solid #bfbfbf;
-	color: #bfbfbf;
-	cursor: not-allowed;
+  background-color: #d9d9d9;
+  border-bottom: 3px solid #bfbfbf;
+  color: #bfbfbf;
+  cursor: not-allowed;
 }
 
-.progressBar {
-	width:50%;
-	padding-left: 10px;
-	border-radius:5px;
-	background: linear-gradient(#FF9900, #FFB84D, #FF9900);
-	background-color:#F2F2F2;
-	background-position: left center;
-	background-repeat: no-repeat;
-	background-size: 0% 100%;
-	transition: none !important;
+.bar {
+  padding-left: 10px;
+  border-radius: 5px;
+  background: linear-gradient(#FF9900, #FFB84D, #FF9900);
+  background-color: #F2F2F2;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 0 100%;
+  padding-right: 1em;
 }
 
-.progressBar.done {
-	background-size: 100% 100%;
-	
+.play {
+  animation-name: bar-animation;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-fill-mode: none;
 }
 
 /* Progress bar animations */
-.progressBar.done[name="bike"] {
-	transition:linear 0.5s all !important;
+@keyframes bar-animation {
+  from {
+    background-size: 0 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
 }
 
-.progressBar.done[name="taxi"] {
-	transition:linear 3s all !important;
+#bike .bar {
+  animation-duration: .5s;
 }
 
-.progressBar.done[name="bus"] {
-	transition:linear 6s all !important;
+#taxi .bar {
+  animation-duration: 3s;
 }
 
-.progressBar.done[name="tram"] {
-	transition:linear 12s all !important;
+#bus .bar {
+  animation-duration: 6s;
 }
 
-.progressBar.done[name="ferry"] {
-	transition:linear 24s all !important;
+#tram .bar {
+  animation-duration: 12s;
 }
 
-.progressBar.done[name="subway"] {
-	transition:linear 48s all !important;
+#ferry .bar {
+  animation-duration: 24s;
 }
 
-.progressBar.done[name="train"] {
-	transition:linear 96s all !important;
+#subway .bar {
+  animation-duration: 48s;
 }
 
-.progressBar.done[name="planerent"] {
-	transition:linear 192s all !important;
+#train .bar {
+  animation-duration: 96s;
 }
 
-.progressBar.done[name="smplane"] {
-	transition:linear 384s all !important;
+#plane_rental .bar {
+  animation-duration: 192s;
 }
 
-.progressBar.done[name="mdplane"] {
-	transition:linear 768s all !important;
+#plane_small .bar {
+  animation-duration: 384s;
 }
 
-.progressBar.done[name="lgplane"] {
-	transition:linear 1536s all !important;
+#plane_medium .bar {
+  animation-duration: 768s;
 }
 
-.progressBar.done[name="lgship"] {
-	transition:linear 3072s all !important;
+#plane_large .bar {
+  animation-duration: 1536s;
+}
+
+#ship_large .bar {
+  animation-duration: 3072s;
 }
