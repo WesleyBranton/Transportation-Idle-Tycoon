@@ -45,7 +45,9 @@ function resetGame() {
 			lastplayed: 1
 		}
 	});
-	document.getElementById('congrats').style.display = 'inline';
+
+	document.body.classList.remove('not-retired');
+	document.body.classList.add('is-retired');
 }
 
-document.getElementById('retire').addEventListener('click',resetGame);
+document.getElementById('retire').addEventListener('click', resetGame);
